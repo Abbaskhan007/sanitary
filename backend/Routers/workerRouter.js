@@ -13,7 +13,7 @@ workerRouter.post("/createWorker", async (req, res) => {
 
 workerRouter.get("/getWorkers/:workerId", async (req, res) => {
   const { workerId } = req.params;
-  const worker  = await workerModel.findById(workerId).populate("worker");
+  const worker  = await workerModel.findById(workerId).populate("worker").populate("feedback.user");
   if (!worker) {
     res.send({ message: "Worker not found" });
   } else {

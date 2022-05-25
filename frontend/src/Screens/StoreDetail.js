@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Link, NavLink, useParams } from "react-router-dom";
-import RatingStars from "../Components/RatingStars";
-import { store } from "../Redux/rootReducer";
+import {
+  Route,
+  Routes,
+  Link,
+  NavLink,
+  useParams,
+  Navigate,
+} from "react-router-dom";
+
 import StoreDescriptionScreen from "./StoreDescriptionScreen";
 import StoreProductsScreen from "./StoreProductsScreen";
 import Axios from "axios";
@@ -10,7 +16,7 @@ export default function StoreDetail() {
   const [storeData, setStoreData] = useState({});
   const { storeId } = useParams();
   const getStoreData = async () => {
-    const {data} = await Axios.get(`/api/stores/getStore/${storeId}`);
+    const { data } = await Axios.get(`/api/stores/getStore/${storeId}`);
     console.log("Store Data", data);
     setStoreData(data);
   };
@@ -19,13 +25,10 @@ export default function StoreDetail() {
   }, []);
   return (
     <div>
-      <img
-        className="w-full   object-fill h-[500px]"
-        src={storeData.image}
-      />
+      <img className="w-full   object-fill h-[500px]" src={storeData.image} />
       <div className="p-12">
-          <p className="my-4 text-3xl font-medium">{storeData.name}</p>
-       
+        <p className="my-4 text-3xl font-medium">{storeData.name}</p>
+
         <div className="flex mb-12 space-x-12 items-center justify-center">
           <NavLink
             style={({ isActive }) =>
@@ -56,7 +59,11 @@ export default function StoreDetail() {
             path="products"
             element={<StoreProductsScreen products={storeData.products} />}
           />
-          <Route path="details" element={<StoreDescriptionScreen description={storeData} />} />
+          <Route
+            path="details"
+            element={<StoreDescriptionScreen description={storeData} />}
+          />
+          <Route path="*" element={<Navigate to="products" />} />
         </Routes>
       </div>
     </div>

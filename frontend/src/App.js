@@ -11,6 +11,9 @@ import WorkerScreen from "./Screens/WorkerScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import StoreDetail from "./Screens/StoreDetail";
 import WorkerDetails from "./Screens/WorkerDetails";
+import Shipping from "./Screens/Shipping";
+import PaymentMethodScreen from "./Screens/PaymentMethodScreen";
+import OrderDetails from "./Screens/OrderDetails";
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
           <Route path="stores/:storeId/*" element={<StoreDetail />} />
           <Route path="workers" element={<WorkerScreen />} />
           <Route path="workers/:workerId" element={<WorkerDetails />} />
+          <Route path="shipping" element={<Shipping />} />
+          <Route path="paymentMethod" element={<PaymentMethodScreen />} />
+          <Route path="orderDetails" element={<OrderDetails />} />
           <Route path="profile/:userId" element={<ProfileScreen />} />
         </Routes>
         <Footer />

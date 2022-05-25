@@ -27,13 +27,13 @@ export default function Slider(props) {
   };
   return (
     <div>
-      <div className="flex items-center relative  mb-12">
+      <div className="flex items-center relative  mb-8">
         <AiOutlineLeft
           className="text-5xl absolute  text-gray-400 font-thin cursor-pointer"
           onClick={() => sliderHandler(-1)}
         />
         <img
-          className="transition ease-in-out-400 duration: 400"
+          className="transition ease-in-out-400 duration:400 object-contain "
           src={images[mainImage]}
         />
         <AiOutlineRight
@@ -46,7 +46,7 @@ export default function Slider(props) {
           <img
             onClick={() => setMainImage(index)}
             className={`w-12 h-12 border  border-gray-100 shadow-md cursor-pointer transition hover:scale-105 ease-in-out-400 duration: 400 rounded ${
-              mainImage === index ? "scale-105 border-violet-500 p-2" : null
+              mainImage === index ? "scale-105 border-violet-500 p-1" : null
             }`}
             src={image}
           />

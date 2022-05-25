@@ -26,6 +26,9 @@ export const WORKER_FETCH_REQUEST = "worker_fetch_request";
 export const WORKER_FETCH_SUCCESS = "worker_fetch_success";
 export const WORKER_FETCH_FAILURE = "worker_fetch_failure";
 
+export const SAVE_SHIPPING_DETAILS = "save_shipping_details";
+export const SAVE_PAYMENT_METHOD = "save_payment_method";
+
 // const PRODUCT_DETAILS_REQUEST = "product_details_request";
 // const PRODUCT_DETAILS_REQUEST_SUCCESS = "product_fetch_request";
 // const PRODUCT_DETAILS_REQUEST_FAIL = "product_fetch_request";
