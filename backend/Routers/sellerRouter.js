@@ -8,7 +8,7 @@ sellerRouter.post("/createSeller", async (req, res) => {
   const checkSeller = await sellerModel.findOne({ user: sellerData.user });
   console.log("//////", sellerData, "////", checkSeller);
   if (checkSeller) {
-    res.send({ message: "The user is already the customer" });
+    res.status(469).send({ message: "The user is already the seller" });
   } else {
     const seller = new sellerModel(sellerData);
     seller.save((err, data) => {

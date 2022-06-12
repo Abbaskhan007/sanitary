@@ -2,16 +2,12 @@ const mongoose = require("mongoose");
 
 const WorkerSchema = mongoose.Schema(
   {
-    worker: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+      require: true,
     },
-    category: [
-      {
-        type: String,
-        require: true,
-      },
-    ],
+    category: [String],
     description: {
       type: String,
       require: true,
@@ -20,7 +16,7 @@ const WorkerSchema = mongoose.Schema(
       type: Number,
       require: true,
     },
-    images: [{ type: String, require: true }],
+    images: [{ type: String }],
     rating: {
       type: Number,
       default: 0,

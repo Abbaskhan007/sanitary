@@ -5,13 +5,15 @@ import ErrorBox from "../Components/ErrorBox";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  ADD_TO_CART,
+  EMPTY_CART,
   REGISTERATION_REQUEST,
   REGISTERATION_REQUEST_FAIL,
   REGISTERATION_REQUEST_SUCCESS,
 } from "../Redux/Constants";
 import Loading from "../Components/Loading";
 
-function Registeration({ registerAction, user }) {
+function Registeration({ registerAction, user, cart }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +37,10 @@ function Registeration({ registerAction, user }) {
       setError("Password is not equal to confirm password");
       return;
     } else {
-      registerAction({ name: name, email: email, password, confirmPassword });
+      registerAction(
+        { name: name, email: email, password, confirmPassword },
+        cart
+      );
     }
   };
   return user.loading ? (
@@ -114,12 +119,13 @@ const mapStateToProps = state => {
   console.log("State", state);
   return {
     user: state.user,
+    cart: state.cart.cart,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerAction: async userData => {
+    registerAction: async (userData, cart) => {
       console.log("user data action", userData);
       dispatch({
         type: REGISTERATION_REQUEST,
@@ -137,6 +143,30 @@ const mapDispatchToProps = dispatch => {
             type: REGISTERATION_REQUEST_SUCCESS,
             payload: data.user,
           });
+
+          localStorage.setItem("user", JSON.stringify(data.user))
+
+          //Pushing all local storage cart items in to the database
+
+
+          localStorage.removeItem("cart");
+          dispatch({ type: EMPTY_CART });
+
+    
+          await cart.forEach(async (item) => {
+            console.log("Item", item);
+            const cartData = await Axios.post("/api/cart/addToCart", {
+              user: data.user._id,
+              products: {
+                product: item.product._id,
+                quantity: item.quantity,
+              },
+            });
+            console.log("Data", data);
+            dispatch({ type: ADD_TO_CART, payload: cartData.data.products });
+          });
+
+         
         }
       } catch (err) {
         dispatch({

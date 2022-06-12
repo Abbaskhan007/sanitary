@@ -6,6 +6,7 @@ export const PRODUCT_SEARCH = "product_search";
 export const REGISTERATION_REQUEST = "registeration_request";
 export const REGISTERATION_REQUEST_SUCCESS = "registeration_request_success";
 export const REGISTERATION_REQUEST_FAIL = "registeration_request_fail";
+export const UPDATE_PROFILE = "update_profile";
 
 export const LOGIN_REQUEST = "login_request";
 export const LOGIN_REQUEST_SUCCESS = "login_request_success";
@@ -13,6 +14,7 @@ export const LOGIN_REQUEST_FAIL = "login_request_fail";
 
 export const CART_DATA_REQUEST = "cart_data_request";
 export const ADD_TO_CART = "add_to_cart";
+export const ADD_TO_CART_LOCAL = "add_to_cart_local";
 export const REMOVE_FROM_CART = "remove_from_cart";
 export const UPDATE_CART = "update_cart";
 export const EMPTY_CART = "empty_cart";
@@ -28,6 +30,10 @@ export const WORKER_FETCH_FAILURE = "worker_fetch_failure";
 
 export const SAVE_SHIPPING_DETAILS = "save_shipping_details";
 export const SAVE_PAYMENT_METHOD = "save_payment_method";
+
+export const MODEL_OPEN = "model_open";
+export const MODEL_CLOSE = "model_close";
+export const DELETE_ACCOUNT = "delete_account";
 
 // const PRODUCT_DETAILS_REQUEST = "product_details_request";
 // const PRODUCT_DETAILS_REQUEST_SUCCESS = "product_fetch_request";

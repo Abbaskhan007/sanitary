@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { connect } from "react-redux";
 import {
+  ADD_TO_CART,
+  EMPTY_CART,
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
@@ -12,14 +14,14 @@ import Loading from "../Components/Loading";
 import { useNavigate } from "react-router-dom";
 import ErrorBox from "../Components/ErrorBox";
 
-function Login({ loginAction, user }) {
+function Login({ loginAction, user, cart }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const submitHandler = async e => {
     e.preventDefault();
-    loginAction({ email, password });
+    loginAction({ email, password }, cart);
   };
 
   useEffect(() => {
@@ -82,13 +84,14 @@ const mapStateToProps = state => {
   console.log("State", state);
   return {
     user: state.user,
+    cart: state.cart.cart
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginAction: async userData => {
-      console.log("user data action", userData);
+    loginAction: async (userData, cart) => {
+      console.log("user data action", (userData, cart));
       dispatch({
         type: LOGIN_REQUEST,
       });
@@ -106,6 +109,25 @@ const mapDispatchToProps = dispatch => {
             payload: data.user,
           });
           localStorage.setItem("user", JSON.stringify(data.user));
+
+
+          localStorage.removeItem("cart");
+          dispatch({ type: EMPTY_CART });
+
+    
+          await cart.forEach(async (item) => {
+            console.log("Item", item);
+            const cartData = await Axios.post("/api/cart/addToCart", {
+              user: data.user._id,
+              products: {
+                product: item.product._id,
+                quantity: item.quantity,
+              },
+            });
+            console.log("Data", data);
+            dispatch({ type: ADD_TO_CART, payload: cartData.data.products });
+          });
+
         }
       } catch (err) {
         dispatch({

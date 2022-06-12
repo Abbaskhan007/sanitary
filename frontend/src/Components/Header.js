@@ -6,6 +6,7 @@ import Axios from "axios";
 import { connect } from "react-redux";
 import {
   CART_DATA_REQUEST,
+  EMPTY_CART,
   LOGOUT,
   PRODUCT_FETCH_REQUEST_FAIL,
   PRODUCT_SEARCH,
@@ -22,7 +23,7 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
 
   console.log("Cart", cart);
   return (
-    <div className="flex flex-row bg-violet-500 items-center justify-between p-2 px-6">
+    <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-2 px-6 z-50">
       <div>
         <p className="text-xl text-white font-bold">Smart Sanitary Store</p>
       </div>
@@ -53,7 +54,7 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
             className="border-0  outline-0 bg-transparent text-sm"
             type="text"
             placeholder="Search product"
-            onChange={(e)=>searchHandler(e.target.value)}
+            onChange={e => searchHandler(e.target.value)}
           />
         </div>
         <div className="relative">
@@ -116,7 +117,9 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: LOGOUT,
       });
-      localStorage.removeItem("user");
+      dispatch({
+        type: EMPTY_CART,
+      });
     },
     searchHandler: async keyword => {
       console.log("Keyword", keyword);

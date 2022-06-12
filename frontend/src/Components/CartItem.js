@@ -3,21 +3,28 @@ import { MdCancel } from "react-icons/md";
 import { connect } from "react-redux";
 import { IoAddOutline } from "react-icons/io5";
 import { AiOutlineMinus } from "react-icons/ai";
-import { REMOVE_FROM_CART, UPDATE_CART } from "../Redux/Constants";
+import { ADD_TO_CART_LOCAL, REMOVE_FROM_CART, UPDATE_CART } from "../Redux/Constants";
 import Axios from "axios";
 import ErrorBox from "./ErrorBox";
 
-function CartItem({ item, updateCart, user, deleteProduct }) {
+function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct }) {
   const [qty, setQty] = useState(item.quantity);
   const [outOfStock, setOutOfStock] = useState(false);
   const [loading, setLoading] = useState(false);
 
+console.log("Item....", item)
+
   useEffect(() => {
-    updateCart({
-      productId: item._id,
-      userId: user._id,
-      quantity: qty,
-    });
+    if (user.name) {
+      updateCart({
+        productId: item._id,
+        userId: user._id,
+        quantity: qty,
+      });
+    }
+   else {
+     addToCartLocal(item.product, qty);
+   }
   }, [qty]);
 
   const qtyHandler = nums => {
@@ -100,57 +107,6 @@ function CartItem({ item, updateCart, user, deleteProduct }) {
       </div>
     </div>
   );
-  //   return (
-  //     <div>
-  //       <div className="flex  justify-between border-b border-gray-300 py-4">
-  //         <div className="flex-1">
-  //           <img src={item.product.images[0]} />
-  //         </div>
-  //         <div style={{ flex: 2 }} className="">
-  //           <p className="text-md font-semibold my-1">{item.product.name}</p>
-  //           <p className="text-gray-600 mb-1">{item.product.description}</p>
-  //           <p className="text-gray-600 mb-1">Category: Basin</p>
-  //           <p className="text-md font-semibold mb-1">Rs: {item.product.price}</p>
-  //           <p className="w-8 h-8 bg-violet-500 rounded-full flex items-center justify-center cursor-pointer">
-  //             <MdDelete className="text-white text-lg" />
-  //           </p>
-  //           {outOfStock ? (
-  //             <ErrorBox
-  //               message="Product is out of stock!!! Please decrease the product quantity"
-  //               variant="fail"
-  //             />
-  //           ) : null}
-  //         </div>
-
-  //         <p className="flex-1">
-  //           <div className="flex items-center ">
-  //             <p
-  //               className="bg-gray-50 py-3 p-3 border border-gray-200"
-  //               onClick={() => qtyHandler(-1)}
-  //             >
-  //               <AiOutlineMinus className="text-lg font-thin" />
-  //             </p>
-  //             <input
-  //               placeholder="1"
-  //               type="number"
-  //               value={qty}
-  //               className="w-16 py-[9px]  text-center outline-0  border-t border-b border-gray-200"
-  //               onChange={e => inputHandler(e.target.value)}
-  //               min={1}
-  //             />
-
-  //             <p
-  //               className="bg-gray-50 py-3 p-3 border border-gray-200"
-  //               onClick={() => qtyHandler(1)}
-  //             >
-  //               <IoAddOutline className="text-lg font-thin" />
-  //             </p>
-  //           </div>
-  //         </p>
-  //         <p className="self-stretch">"1020"</p>
-  //       </div>
-  //     </div>
-  //   );
 }
 
 const mapStateToProps = state => {
@@ -182,6 +138,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: REMOVE_FROM_CART,
         payload: data.products,
+      });
+    },
+    addToCartLocal: (product, qty) => {
+      dispatch({
+        type: ADD_TO_CART_LOCAL,
+        payload: { product, quantity: qty },
       });
     },
   };

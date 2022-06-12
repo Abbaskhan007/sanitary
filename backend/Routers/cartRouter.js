@@ -20,7 +20,7 @@ router.get("/:userId", async (req, res) => {
 
 router.post("/addToCart", async (req, res) => {
   const cartData = req.body;
-  console.log("Req.body", cartData);
+  console.log("Req.body*******************************************************************", cartData);
   const checkUser = await cartModel.findOne({ user: cartData.user }); //checking if the user cart is already created in the database or not
 
   // if the user's cart already exist then check if the product is present in the user cart or not

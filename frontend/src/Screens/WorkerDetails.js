@@ -17,7 +17,7 @@ export default function WorkerDetails() {
   useEffect(() => {
     fetchWorker();
   }, []);
-  return workerData.rating ? (
+  return workerData.user ? (
     <div className="p-8 lg:p-12">
       <div className="grid grid-cols-2 gap-12  items-center">
         <Slider images={workerData.images} />
@@ -25,9 +25,9 @@ export default function WorkerDetails() {
           <div className="flex items-center space-x-1 md:-mt-8">
             <img
               className="h-12 w-12 rounded-full"
-              src={workerData.worker.profileImage}
+              src={workerData.user.profileImage}
             />
-            <p className="text-3xl font-light">{workerData.worker.name}</p>
+            <p className="text-3xl font-light">{workerData.user.name}</p>
           </div>
           <p className="font-semibold my-4">{`Rs: ${workerData.price}/hour`}</p>
           <div className="flex items-center space-x-2">

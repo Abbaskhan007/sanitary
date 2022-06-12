@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  ADD_TO_CART_LOCAL,
   CART_DATA_REQUEST,
   EMPTY_CART,
   REMOVE_FROM_CART,
@@ -8,7 +9,9 @@ import {
   UPDATE_CART,
 } from "../Constants";
 
-const initialState = { cart: [], shipping: {}, payment: "bank" };
+const initialCart = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")): []
+
+const initialState = { cart: initialCart, shipping: {}, payment: "bank" };
 
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +29,39 @@ export const cartReducer = (state = initialState, action) => {
       return { ...state, shipping: action.payload };
     case EMPTY_CART:
       return { ...state, cart: [] };
+    case ADD_TO_CART_LOCAL:
+      const exist = state.cart.find(
+        item => item.product._id === action.payload.product._id
+      );
+
+      console.log("Exist", exist);
+
+      console.log(action.payload);
+      if (!exist) {
+        console.log("In exist *************");
+        const updatedCart = [
+          ...state.cart,
+          {
+            product: action.payload.product,
+            quantity: action.payload.quantity,
+            _id: "",
+          },
+        ];
+        console.log("Updated Cart", updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        return { ...state, cart: updatedCart };
+      } else {
+        const updatedCart = state.cart.map(item => {
+          if (item.product._id === action.payload.product._id) {
+            return { ...item, quantity: action.payload.quantity };
+          } else {
+            return item;
+          }
+        });
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return { ...state, cart: updatedCart };
+      }
     default:
       return state;
   }

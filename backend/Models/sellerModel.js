@@ -5,8 +5,9 @@ const sellerSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+      require: true,
     },
-    category: { type: String, require: true },
+    categories: [String],
     store: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -14,10 +14,13 @@ import WorkerDetails from "./Screens/WorkerDetails";
 import Shipping from "./Screens/Shipping";
 import PaymentMethodScreen from "./Screens/PaymentMethodScreen";
 import OrderDetails from "./Screens/OrderDetails";
+import { connect } from "react-redux";
+import AdminDashboard from "./Screens/AdminDashboard";
 
-function App() {
+function App({ model }) {
+  console.log("Model******", model);
   return (
-    <div className="relative min-h-[100vh] pb-16">
+    <div className={`relative min-h-[100vh] py-16`}>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -33,7 +36,8 @@ function App() {
           <Route path="shipping" element={<Shipping />} />
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
-          <Route path="profile/:userId" element={<ProfileScreen />} />
+          <Route path="profile/:userId/*" element={<ProfileScreen />} />
+          <Route path="AdminDashboard/*" element={<AdminDashboard />} />
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -41,4 +45,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    model: state.model.modelOpen,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);

@@ -1,8 +1,9 @@
 import { createStore, compose, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { cartReducer } from "./Reducer.js/cartReducer";
+import { modalReducer } from "./Reducer.js/modalReducer";
 import { productReducer } from "./Reducer.js/productReducer";
-import {storeReducer} from "./Reducer.js/StoreReducer";
+import { storeReducer } from "./Reducer.js/StoreReducer";
 import { userReducer } from "./Reducer.js/userReducer";
 import { workerReducer } from "./Reducer.js/workerReducer";
 
@@ -13,8 +14,8 @@ const reducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   store: storeReducer,
-  worker: workerReducer
-  
+  worker: workerReducer,
+  model: modalReducer,
 });
 
 export const store = createStore(

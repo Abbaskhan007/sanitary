@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CheckoutSteps from "../Components/CheckoutSteps";
 import { connect } from "react-redux";
 import { SAVE_SHIPPING_DETAILS } from "../Redux/Constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ErrorBox from "../Components/ErrorBox";
 
 function ShippingScreen({ user, saveShipping }) {
@@ -13,6 +13,8 @@ function ShippingScreen({ user, saveShipping }) {
   const [postalCode, setPostalCode] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
+  console.log("Params", params);
 
   const onSubmitHandler = () => {
     if (name && address && city && country && postalCode) {
@@ -26,7 +28,7 @@ function ShippingScreen({ user, saveShipping }) {
 
   useEffect(() => {
     if (!user.name) {
-      navigate("login");
+      navigate("/login");
     }
   }, []);
 

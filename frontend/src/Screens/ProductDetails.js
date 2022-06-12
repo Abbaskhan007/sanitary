@@ -8,9 +8,9 @@ import { IoAddOutline } from "react-icons/io5";
 import { AiOutlineMinus } from "react-icons/ai";
 import Slider from "../Components/Slider";
 import { connect } from "react-redux";
-import { ADD_TO_CART } from "../Redux/Constants";
+import { ADD_TO_CART, ADD_TO_CART_LOCAL } from "../Redux/Constants";
 
-function ProductDetails({ addToCartAction, user, cart }) {
+function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
   const [productData, setProductData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, seterror] = useState(null);
@@ -18,6 +18,8 @@ function ProductDetails({ addToCartAction, user, cart }) {
   const [outOfStock, setOutOfStock] = useState(false);
 
   const { productId } = useParams();
+
+  console.log("Product Details Cart", cart);
 
   console.log("Params", productId);
 
@@ -61,10 +63,17 @@ function ProductDetails({ addToCartAction, user, cart }) {
   console.log("Qty", qty);
 
   const addToCart = () => {
-    addToCartAction({
-      user: user.user._id,
-      products: { product: productData._id, quantity: qty },
-    });
+    if (!user.user.name) {
+      addToCartLocal(productData, qty);
+    } else {
+      addToCartAction(
+        {
+          user: user.user._id,
+          products: { product: productData._id, quantity: qty },
+        },
+        user
+      );
+    }
   };
 
   return loading ? (
@@ -132,6 +141,7 @@ function ProductDetails({ addToCartAction, user, cart }) {
 }
 
 const mapStateToProps = state => {
+  console.log("State PD: ", state);
   return {
     user: state.user,
     cart: state.cart,
@@ -148,6 +158,12 @@ const mapDispatchToProps = dispatch => {
         payload: data.products,
       });
       console.log("Data", data);
+    },
+    addToCartLocal: (product, qty) => {
+      dispatch({
+        type: ADD_TO_CART_LOCAL,
+        payload: { product, quantity: qty },
+      });
     },
   };
 };

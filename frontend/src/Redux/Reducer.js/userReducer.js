@@ -5,7 +5,9 @@ import {
   REGISTERATION_REQUEST,
   REGISTERATION_REQUEST_FAIL,
   REGISTERATION_REQUEST_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  UPDATE_PROFILE,
+  DELETE_ACCOUNT,
 } from "../Constants";
 
 const user = localStorage.getItem("user")
@@ -30,7 +32,16 @@ export const userReducer = (state = initialState, action) => {
     case LOGIN_REQUEST_FAIL:
       return { ...state, loading: false, error: action.payload };
     case LOGOUT:
+      localStorage.removeItem("user");
+      localStorage.removeItem("cart");
       return { ...state, user: {} };
+    case UPDATE_PROFILE:
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      return { ...state, user: action.payload };
+    case DELETE_ACCOUNT:
+      localStorage.removeItem("user");
+      localStorage.removeItem("cart");
+      return { ...state, user: [] };
     default:
       return state;
   }

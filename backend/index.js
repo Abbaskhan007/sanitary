@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const sellerRouter = require("./Routers/sellerRouter");
 const storeRouter = require("./Routers/storeRouter");
 const workerRouter = require("./Routers/workerRouter");
+const workerRequestRouter = require("./Routers/workerRequestRouter");
+const sellerRequestRouter = require("./Routers/sellerRequestRouter");
 
 mongoose
   .connect("mongodb://localhost/sanitary", { useNewUrlParser: true })
@@ -29,4 +31,6 @@ app.use("/api/cart", cartRouter);
 app.use("/api/seller", sellerRouter);
 app.use("/api/stores", storeRouter);
 app.use("/api/worker", workerRouter);
+app.use("/api/workerRequests", workerRequestRouter);
+app.use("/api/sellerRequests", sellerRequestRouter);
 app.listen(5000, () => console.log("Server running at port 5000"));
