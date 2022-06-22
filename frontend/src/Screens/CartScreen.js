@@ -19,6 +19,7 @@ function CartScreen({ cart }) {
   );
 }
 
+
 const mapStateToProps = state => {
   return {
     cart: state.cart.cart,
@@ -34,3 +35,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
+
+//26

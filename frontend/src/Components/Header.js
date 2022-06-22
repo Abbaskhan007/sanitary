@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { BsCart } from "react-icons/bs";
 import Axios from "axios";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   CART_DATA_REQUEST,
   EMPTY_CART,
@@ -14,6 +15,7 @@ import {
 
 function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user.name) {
@@ -25,27 +27,49 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
   return (
     <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-2 px-6 z-50">
       <div>
-        <p className="text-xl text-white font-bold">Smart Sanitary Store</p>
+        <img
+          onClick={() => navigate("/")}
+          className="h-12 cursor-pointer"
+          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1655596086/d67b2b3ff423426fa14186e9aeb3befd_1_afk97o.png"
+        />
+        {
+          //<img className="h-12 object-contain" src="/sanitary-logo.png" />
+        }
       </div>
       <div className="flex items-center justify-between ">
-        <Link
+        <NavLink
+          style={({ isActive }) =>
+            isActive
+              ? { borderBottomColor: "#fff", borderBottomWidth: "4px" }
+              : undefined
+          }
           className="text-white font-semibold text-medium mr-12 cursor-pointer"
           to=""
         >
           Products
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
+          style={({ isActive }) =>
+            isActive
+              ? { borderBottomColor: "#fff", borderBottomWidth: "4px" }
+              : undefined
+          }
           className="text-white font-semibold text-medium mr-12 cursor-pointer"
           to="/stores"
         >
           Stores
-        </Link>
-        <Link
-          className="text-white font-semibold text-medium mr-12 cursor-pointer"
+        </NavLink>
+        <NavLink
+          style={({ isActive }) =>
+            isActive
+              ? { borderBottomColor: "#fff", borderBottomWidth: "4px" }
+              : undefined
+          }
+          className="text-white font-semibold text-medium mr-12 cursor-pointer "
           to="workers"
         >
           Workers
-        </Link>
+        </NavLink>
       </div>
       <div className="flex items-center">
         <div className="flex items-center bg-white py-1 px-2 rounded-md mr-8">
@@ -67,15 +91,30 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
           </Link>
         </div>
         {user.name ? (
-          <div className="relative group transition ease-out-500 duration-500 h-full cursor-pointer">
+          <div className="relative group transition ease-out-500 duration-500 h-full cursor-pointer ml-4 min-w-[160px]   ">
             <img
               src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png"
-              className="cursor-pointer h-10 ml-8 w-10 rounded-full p-1 border border-white"
+              className="cursor-pointer h-10  w-10 rounded-full p-1 border border-white mx-auto"
             />
-            <div className="absolute hidden hover:block rounded-md  group-hover:block  shadow-md bg-gray-50 -right-4 min-w-48 w-full overflow-hidden z-10">
+            <div className="absolute hidden hover:block rounded-md   group-hover:block  shadow-md bg-gray-50 min-w-48 w-full overflow-hidden z-10 text-center">
               <div className="  hover:bg-gray-200 h-8 flex-1  px-2 ">
                 <Link to={`profile/${user._id}`}>Profile</Link>
               </div>
+              {user.isSeller && (
+                <div className="  hover:bg-gray-200 h-8 flex-1  px-2 border-gray-400 border-t ">
+                  <Link to={`/sellerDashboard`}>Seller Dashboard</Link>
+                </div>
+              )}
+              {user.isWorker && (
+                <div className="  hover:bg-gray-200 h-8 flex-1  px-2 border-gray-400 border-t ">
+                  <Link to={`/workerDashboard`}>Worker Dashboard</Link>
+                </div>
+              )}
+              {user.isAdmin && (
+                <div className="  hover:bg-gray-200 h-8 flex-1  px-2 border-gray-400 border-t ">
+                  <Link to={`/adminDashboard`}>Admin Dashboard</Link>
+                </div>
+              )}
               <p
                 className="px-2 border-gray-400 border-t h-8 hover:bg-gray-200"
                 onClick={logout}

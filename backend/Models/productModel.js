@@ -4,21 +4,29 @@ const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     images: [
       {
         type: String,
-        require,
+        required: true,
       },
     ],
+    category: [{ type: String, required: true }],
+    seller: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sellers",
+      required: true,
+    },
+
     store: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Stores",
+      ref: "Store",
+      required: true,
     },
     rating: {
       type: Number,
@@ -38,15 +46,15 @@ const productSchema = mongoose.Schema(
     ],
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
     inStock: {
       type: Number,
-      require: true,
+      required: true,
     },
     shippingPrice: {
       type: Number,
-      default: 0,
+      required: true,
     },
   },
   { timeStamps: true }

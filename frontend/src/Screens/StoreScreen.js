@@ -19,7 +19,7 @@ function StoreScreen({ fetchStoreData, store }) {
     return <ErrorBox variant="fail" message={store.error} />;
   else {
     return (
-      <div className="grid grid-cols-4 p-12 gap-8">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  p-12 gap-8">
         {store.data?.map(item => (
           <StoreCard store={item} />
         ))}

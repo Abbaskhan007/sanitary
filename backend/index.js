@@ -8,6 +8,11 @@ const storeRouter = require("./Routers/storeRouter");
 const workerRouter = require("./Routers/workerRouter");
 const workerRequestRouter = require("./Routers/workerRequestRouter");
 const sellerRequestRouter = require("./Routers/sellerRequestRouter");
+const {
+  RemoveBgResult,
+  RemoveBgError,
+  removeBackgroundFromImageUrl,
+} = require("remove.bg");
 
 mongoose
   .connect("mongodb://localhost/sanitary", { useNewUrlParser: true })
@@ -23,6 +28,27 @@ app.get("/", (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("Server running");
+});
+
+app.post("/removeBackground", (req, res) => {
+  console.log("image", req.body);
+  const url = "https://domain.tld/path/file.jpg";
+  const outputFile = `${__dirname}/out/img-removed-from-file.png`;
+
+  removeBackgroundFromImageUrl({
+    url,
+    apiKey: "fe1gkrUZNL2mGWwuodmDd94W",
+    size: "regular",
+    type: "person",
+    outputFile,
+  })
+    .then(result => {
+      console.log(`File saved to ${outputFile}`);
+      const base64img = result.base64img;
+    })
+    .catch(errors => {
+      console.log(JSON.stringify(errors));
+    });
 });
 
 app.use("/api/products", productRouter);

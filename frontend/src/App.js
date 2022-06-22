@@ -16,6 +16,10 @@ import PaymentMethodScreen from "./Screens/PaymentMethodScreen";
 import OrderDetails from "./Screens/OrderDetails";
 import { connect } from "react-redux";
 import AdminDashboard from "./Screens/AdminDashboard";
+import SellerDashboard from "./Screens/SellerDashboard";
+import EditStore from "./Screens/EditStore";
+import WorkerDashboard from "./Screens/WorkerDashboard";
+import EditProduct from "./Screens/EditProduct";
 
 function App({ model }) {
   console.log("Model******", model);
@@ -26,6 +30,7 @@ function App({ model }) {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="products/:productId" element={<ProductDetails />} />
+          <Route path="editProduct/:productId" element={<EditProduct />} />
           <Route path="login" element={<Login />} />
           <Route path="registeration" element={<Registeration />} />
           <Route path="cart" element={<CartScreen />} />
@@ -37,7 +42,9 @@ function App({ model }) {
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
           <Route path="profile/:userId/*" element={<ProfileScreen />} />
-          <Route path="AdminDashboard/*" element={<AdminDashboard />} />
+          <Route path="adminDashboard/*" element={<AdminDashboard />} />
+          <Route path="workerDashboard/*" element={<WorkerDashboard />} />
+          <Route path="sellerDashboard/*" element={<SellerDashboard />} />
         </Routes>
         <Footer />
       </BrowserRouter>

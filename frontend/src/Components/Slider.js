@@ -33,7 +33,7 @@ export default function Slider(props) {
           onClick={() => sliderHandler(-1)}
         />
         <img
-          className="transition ease-in-out-400 duration:400 object-contain "
+          className="transition ease-in-out-400 duration:400 object-contain mx-auto"
           src={images[mainImage]}
         />
         <AiOutlineRight

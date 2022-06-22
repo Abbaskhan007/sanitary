@@ -63,7 +63,7 @@ export default function StoreDetail() {
             path="details"
             element={<StoreDescriptionScreen description={storeData} />}
           />
-          <Route path="*" element={<Navigate to="products" />} />
+          
         </Routes>
       </div>
     </div>

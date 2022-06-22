@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { cartReducer } from "./Reducer.js/cartReducer";
 import { modalReducer } from "./Reducer.js/modalReducer";
 import { productReducer } from "./Reducer.js/productReducer";
+import { sellerReducer } from "./Reducer.js/sellerReducer";
 import { storeReducer } from "./Reducer.js/StoreReducer";
 import { userReducer } from "./Reducer.js/userReducer";
 import { workerReducer } from "./Reducer.js/workerReducer";
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   store: storeReducer,
   worker: workerReducer,
   model: modalReducer,
+  seller: sellerReducer,
 });
 
 export const store = createStore(

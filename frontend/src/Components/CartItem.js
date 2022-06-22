@@ -12,8 +12,6 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct }) {
   const [outOfStock, setOutOfStock] = useState(false);
   const [loading, setLoading] = useState(false);
 
-console.log("Item....", item)
-
   useEffect(() => {
     if (user.name) {
       updateCart({
@@ -150,3 +148,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
+
+//130

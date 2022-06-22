@@ -18,4 +18,14 @@ sellerRouter.post("/createSeller", async (req, res) => {
   }
 });
 
+sellerRouter.get("/getSeller/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const seller = await sellerModel.findOne({ user: userId });
+  if (seller) {
+    res.status(200).json(seller);
+  } else {
+    res.status(400).json({ message: "Seller not found" });
+  }
+});
+
 module.exports = sellerRouter;

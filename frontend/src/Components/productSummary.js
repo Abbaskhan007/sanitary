@@ -40,3 +40,5 @@ export default function ProductSummary({ cartData }) {
     </div>
   );
 }
+
+//42
