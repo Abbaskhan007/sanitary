@@ -30,13 +30,14 @@ export default function WorkerRequests() {
       });
 
       console.log("Requests", response);
-      const { categories, description, user } = response.data;
+      const { categories, description, user, city } = response.data;
       Axios.post("/api/worker/createWorker", {
-        categories,
+        category: categories,
         description,
         user: user,
         price,
         images,
+        city,
       });
       fetchRequests();
     } catch (err) {
@@ -44,11 +45,12 @@ export default function WorkerRequests() {
     }
   };
 
-  const onReject = async (userId, requestId) => {
+  const onReject = async requestId => {
+    console.log("Request Id", requestId);
     try {
-      const response = await Axios.put(`/api/sellerRequests/rejectRequest`, {
-        requestId,
-      });
+      const response = await Axios.delete(
+        `/api/sellerRequests/rejectRequest/${requestId}`
+      );
       fetchRequests();
     } catch (err) {
       alert(err.message);
@@ -85,14 +87,9 @@ export default function WorkerRequests() {
               </div>
             </div>
             <p className="text-lg font-medium">{`Rs: ${request.price}/hour`}</p>
+            <p className="text-lg font-medium mt-2">{`City: ${request.city}`}</p>
             <p className={`${!show && "line-clamp-3"} my-2`}>
-              Hi, How are you buddy Hi, How are you buddy How are you buddy Hi,
-              How are you buddy How are you buddy Hi, How are you buddy How are
-              you buddy Hi, How are you buddy How are you buddy Hi, How are you
-              buddy How are you buddy Hi, How are you buddy How are you buddy
-              Hi, How are you buddy Hi, How are you buddy How are you buddy Hi,
-              How are you buddy How are you buddy Hi, How are you buddy How are
-              you buddy Hi, How are you buddy How are you buddy{" "}
+              {request.description}
             </p>
             {!show ? (
               <button

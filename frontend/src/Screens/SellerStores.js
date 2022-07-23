@@ -21,19 +21,27 @@ function SellerStores({ seller, store }) {
     }
   };
 
-  return (
-    <div className="grid grid-cols-3 p-12 gap-8">
-      {stores.map(store => (
-        <StoreCard store={store} />
-      ))}
-    </div>
-  );
+  if (stores.length <= 0) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <p className="text-center text-2xl  text-gray-500">No Store Present</p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="grid grid-cols-3 p-12 gap-8">
+        {stores.map(store => (
+          <StoreCard store={store} />
+        ))}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
   return {
     seller: state.seller,
-    store: state.store.data
+    store: state.store.data,
   };
 };
 

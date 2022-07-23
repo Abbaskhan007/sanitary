@@ -11,6 +11,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
   const [images, setImages] = useState([]);
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
+  const [city, setCity] = useState("");
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cloudinaryFormatImages, setCloudinaryFormatImages] = useState([]);
@@ -69,6 +70,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
       images: cloudinaryImages,
       user: user._id,
       categories: categoriesValue,
+      city
     };
     console.log("Data", workerData);
     try {
@@ -91,7 +93,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
 
   return (
     <div>
-      <button onClick={openModel} className="bg-green-200 w-52 p-3 rounded-md ">
+      <button disabled={user.isWorker} onClick={openModel} className="bg-green-200 w-52 p-3 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed">
         Send Worker Request
       </button>
       {showModel ? (
@@ -140,6 +142,17 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
                       placeholder="Enter Price Per Hour"
                       value={price}
                       onChange={e => setPrice(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-lg font-medium ">City</label>
+                    <input
+                      type="text"
+                      className="outline-none border-2 border-gray-200 p-1 rounded-md w-full mt-1"
+                      placeholder="Enter City Name"
+                      name="city"
+                      value={city}
+                      onChange={e => setCity(e.target.value)}
                     />
                   </div>
                   <div>

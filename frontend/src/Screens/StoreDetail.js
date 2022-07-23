@@ -26,8 +26,9 @@ export default function StoreDetail() {
   return (
     <div>
       <img className="w-full   object-fill h-[500px]" src={storeData.image} />
-      <div className="p-12">
-        <p className="my-4 text-3xl font-medium">{storeData.name}</p>
+      <div className="p-12 text-center">
+        <span className="my-4 text-3xl font-medium text-center border-2 border-gray-400 p-2 px-4 text-gray-600">{storeData.name}</span>
+        <p className="mb-8"></p>
 
         <div className="flex mb-12 space-x-12 items-center justify-center">
           <NavLink
@@ -55,6 +56,7 @@ export default function StoreDetail() {
         </div>
 
         <Routes>
+        
           <Route
             path="products"
             element={<StoreProductsScreen products={storeData.products} />}
@@ -63,6 +65,7 @@ export default function StoreDetail() {
             path="details"
             element={<StoreDescriptionScreen description={storeData} />}
           />
+          <Route path="*" element={<Navigate to="products" replace />} />
           
         </Routes>
       </div>

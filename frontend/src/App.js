@@ -20,6 +20,7 @@ import SellerDashboard from "./Screens/SellerDashboard";
 import EditStore from "./Screens/EditStore";
 import WorkerDashboard from "./Screens/WorkerDashboard";
 import EditProduct from "./Screens/EditProduct";
+import ProtectRoute from "./Components/ProtectRoute";
 
 function App({ model }) {
   console.log("Model******", model);
@@ -41,10 +42,42 @@ function App({ model }) {
           <Route path="shipping" element={<Shipping />} />
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
-          <Route path="profile/:userId/*" element={<ProfileScreen />} />
-          <Route path="adminDashboard/*" element={<AdminDashboard />} />
-          <Route path="workerDashboard/*" element={<WorkerDashboard />} />
-          <Route path="sellerDashboard/*" element={<SellerDashboard />} />
+
+          <Route
+            path="profile/:userId/*"
+            element={
+              <ProtectRoute>
+                <ProfileScreen />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="adminDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isAdmin"}>
+                <AdminDashboard />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="workerDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isWorker"}>
+                <WorkerDashboard />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="sellerDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isSeller"}>
+                <SellerDashboard />
+              </ProtectRoute>
+            }
+          />
+          {/* <Route path="adminDashboard/*" element={<AdminDashboard />} /> */}
+          {/* <Route path="workerDashboard/*" element={<WorkerDashboard />} />
+          <Route path="sellerDashboard/*" element={<SellerDashboard />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -3,14 +3,20 @@ import { MdCancel } from "react-icons/md";
 import { connect } from "react-redux";
 import { IoAddOutline } from "react-icons/io5";
 import { AiOutlineMinus } from "react-icons/ai";
-import { ADD_TO_CART_LOCAL, REMOVE_FROM_CART, UPDATE_CART } from "../Redux/Constants";
+import {
+  ADD_TO_CART_LOCAL,
+  REMOVE_FROM_CART,
+  UPDATE_CART,
+} from "../Redux/Constants";
 import Axios from "axios";
 import ErrorBox from "./ErrorBox";
 
-function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct }) {
+function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct, products, store }) {
   const [qty, setQty] = useState(item.quantity);
   const [outOfStock, setOutOfStock] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  console.log("Items in cart------", products);
 
   useEffect(() => {
     if (user.name) {
@@ -19,11 +25,10 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct }) {
         userId: user._id,
         quantity: qty,
       });
+    } else {
+      addToCartLocal(item.product, qty);
     }
-   else {
-     addToCartLocal(item.product, qty);
-   }
-  }, [qty]);
+  }, [qty, products, store]);
 
   const qtyHandler = nums => {
     let num = parseInt(nums ? nums : 0);
@@ -67,7 +72,7 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct }) {
 
       <img
         className="w-52 h-52 rounded-tl-md rounded-bl-md "
-        src={item.product.images[0]}
+        src={item.product?.images[0]}
       />
       <div className="p-2 px-6">
         <p className="text-md font-bold my-1">{item.product.name}</p>
@@ -111,6 +116,8 @@ const mapStateToProps = state => {
   return {
     cart: state.cart.cart,
     user: state.user.user,
+    products: state.productList.products,
+    store: state.store.data
   };
 };
 

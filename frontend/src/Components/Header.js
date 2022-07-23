@@ -13,7 +13,15 @@ import {
   PRODUCT_SEARCH,
 } from "../Redux/Constants";
 
-function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
+function Header({
+  cart,
+  user,
+  fetchUserCart,
+  logout,
+  searchHandler,
+  store,
+  products,
+}) {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
@@ -21,7 +29,7 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
     if (user.name) {
       fetchUserCart(user._id);
     }
-  }, [user]);
+  }, [user, store, products]);
 
   console.log("Cart", cart);
   return (
@@ -32,9 +40,7 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
           className="h-12 cursor-pointer"
           src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1655596086/d67b2b3ff423426fa14186e9aeb3befd_1_afk97o.png"
         />
-        {
-          //<img className="h-12 object-contain" src="/sanitary-logo.png" />
-        }
+       
       </div>
       <div className="flex items-center justify-between ">
         <NavLink
@@ -72,15 +78,7 @@ function Header({ cart, user, fetchUserCart, logout, searchHandler }) {
         </NavLink>
       </div>
       <div className="flex items-center">
-        <div className="flex items-center bg-white py-1 px-2 rounded-md mr-8">
-          <IoSearch className="text-gray-500 mr-2" />
-          <input
-            className="border-0  outline-0 bg-transparent text-sm"
-            type="text"
-            placeholder="Search product"
-            onChange={e => searchHandler(e.target.value)}
-          />
-        </div>
+        
         <div className="relative">
           <Link to="cart">
             <BsCart className="text-white text-2xl cursor-pointer" />
@@ -140,6 +138,8 @@ const mapStateToProps = state => {
   return {
     cart: state.cart.cart,
     user: state.user.user,
+    products: state.productList,
+    store: state.store,
   };
 };
 
