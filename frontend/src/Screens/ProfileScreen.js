@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 
 import {
   IoPersonOutline,
@@ -17,7 +17,8 @@ import { EMPTY_CART, LOGOUT } from "../Redux/Constants";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 
-function ProfileScreen({ logout }) {
+function ProfileScreen({ user, logout }) {
+  console.log("User", user);
   const navigate = useNavigate();
 
   const onLogout = () => {
@@ -30,6 +31,7 @@ function ProfileScreen({ logout }) {
     <div className="flex min-h-[calc(100vh-120px)] relative  bg-gray-50">
       <div className="flex flex-col w-[250px] fixed h-full  border-r-2 border-gray-100  py-8">
         <h3 className="text-xl font-semibold my-4 text-center">User Profile</h3>
+
         <NavLink
           style={({ isActive }) =>
             isActive
@@ -93,6 +95,7 @@ function ProfileScreen({ logout }) {
           <Route path="reviews" element={<UserReviewsScreen />} />
           <Route path="orders" element={<UserOrdersScreen />} />
           <Route path="setting" element={<Settings />} />
+          <Route path="*" element={<Navigate to="userInfo" replace />} />
         </Routes>
       </div>
     </div>
@@ -101,7 +104,7 @@ function ProfileScreen({ logout }) {
 
 const mapStateToProps = state => {
   return {
-    state: state,
+    user: state.user.user,
   };
 };
 

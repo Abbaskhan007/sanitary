@@ -34,6 +34,7 @@ export const userReducer = (state = initialState, action) => {
     case LOGOUT:
       localStorage.removeItem("user");
       localStorage.removeItem("cart");
+      localStorage.removeItem("seller");
       return { ...state, user: {} };
     case UPDATE_PROFILE:
       localStorage.setItem("user", JSON.stringify(action.payload));

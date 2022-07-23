@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductSummary({ cartData }) {
+  console.log("Cart Data-----", cartData);
   const navigate = useNavigate();
   const totalPrice = cartData.reduce((total, current) => {
     return (
@@ -40,3 +41,5 @@ export default function ProductSummary({ cartData }) {
     </div>
   );
 }
+
+//42

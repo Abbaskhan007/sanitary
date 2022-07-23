@@ -76,6 +76,8 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
     }
   };
 
+  console.log("Product Data---------", productData);
+
   return loading ? (
     <Loading />
   ) : error ? (
@@ -83,7 +85,7 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
   ) : (
     <div className="flex flex-col flex-1 space-x-0 md:space-x-8 space-y-8 md:flex-row md:items-center py-4 px-6 box-border sm:flex-col sm:px-10">
       <div className="flex-1 sm:px-10">
-        <Slider />
+        <Slider images={productData.images} />
       </div>
       <div className="flex-1">
         <p className="text-4xl font-light">{productData.name}</p>
@@ -96,9 +98,11 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
         <div className="flex my-4 items-center">
           <img
             className="h-10 w-10 rounded-full border border-gray-300 p-1 mr-2"
-            src={productData.images[0]}
+            src={productData?.images[0]}
           />
-          <p className="text-medium font-semibold">The sanitary store</p>
+          <p className="text-medium font-semibold">
+            {productData?.store?.name}
+          </p>
         </div>
         <p className="text-sm font-normal italic">{productData.description}</p>
         <p className="text-sm text-gray-600 mb-2 mt-4">QTY</p>
