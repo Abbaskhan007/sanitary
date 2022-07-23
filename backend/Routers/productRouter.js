@@ -4,6 +4,7 @@ const productModel = require("../Models/productModel");
 const storeModel = require("../Models/storeModel");
 const sellerModel = require("../Models/sellerModel");
 const mongoose = require("mongoose");
+const cartModel = require("../Models/cartModel");
 
 router.post("/addProduct", (req, res) => {
   const data = req.body;
@@ -107,10 +108,32 @@ router.delete("/delete/:productId", (req, res) => {
         {},
         { $pull: { products: productId } }
       );
+      const cartItems = await cartModel.updateMany(
+        {},
+        { $pull: { products: { product: productId } } }
+      );
+      console.log("Deleted Items---", cartItems);
       console.log("Store Response", sellerResponse);
       res.status(200).json(data);
     }
   });
+});
+
+router.post("/filteredProducts", (req, res) => {
+  console.log("Filtered Body", req.body);
+  const { keyword, min, max, categories } = req.body;
+  productModel.find(
+    {
+      name: { $regex: keyword, $options: "i" },
+      price: { $gte: min, $lte: max },
+      category: { $in: categories },
+    },
+    (err, data) => {
+      if (err) throw err;
+      console.log(`Data of filter><><><>//: ${data}`);
+      res.status("200").send(data);
+    }
+  );
 });
 
 module.exports = router;

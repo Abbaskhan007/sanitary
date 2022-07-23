@@ -8,6 +8,10 @@ const WorkerRequestSchema = mongoose.Schema(
       unique: true,
       ref: "user",
     },
+    city: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       require: true,

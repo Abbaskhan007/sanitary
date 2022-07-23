@@ -1,14 +1,14 @@
 const express = require("express");
+const { mongoose } = require("mongoose");
+const cartModel = require("../Models/cartModel");
 const productModel = require("../Models/productModel");
 const sellerModel = require("../Models/sellerModel");
-
 const storeModel = require("../Models/storeModel");
+
 const storeRouter = express.Router();
 
 storeRouter.post("/createStore", async (req, res) => {
   const storeData = req.body;
-
-  console.log("//////", storeData);
 
   const store = new storeModel(storeData);
   store.save((err, data) => {
@@ -19,7 +19,6 @@ storeRouter.post("/createStore", async (req, res) => {
 
 storeRouter.get("/getStores", async (req, res) => {
   const storeData = await storeModel.find({}).populate("seller");
-  console.log("store data", storeData);
   res.send(storeData);
 });
 
@@ -46,10 +45,8 @@ storeRouter.get("/getStores/:seller", async (req, res) => {
 });
 
 storeRouter.delete("/deleteStore/:storeId", async (req, res) => {
-  console.log("Stores--------------______");
   const { storeId } = req.params;
   storeModel.findByIdAndRemove(storeId, async (err, data) => {
-    console.log("Data-------------", data);
     if (err) {
       res.status(400).json({ message: err });
     } else {
@@ -61,7 +58,33 @@ storeRouter.delete("/deleteStore/:storeId", async (req, res) => {
       const stores = await storeModel.find({ seller: req.body.sellerId });
       console.log("products--------------------", products);
       console.log("Stores--------------------", stores);
-      res.status(200).json(stores);
+
+      const storeData = await storeModel.findById(storeId);
+      console.log("***************))", storeData);
+      cartModel.updateMany(
+        { products: { $in: storeData.products } },
+        { $pull: { products: { product: { $in: storeData.products } } } },
+        (err, data) => {
+          console.log(err, "Data***********", data);
+          if (err) {
+            return res.status(400).json(err);
+          }
+          res.status(200).json(stores);
+        }
+      );
+
+      // cartModel.updateMany(
+      //   {},
+      //   {
+      //     $pull: {
+      //       products: {
+      //         "product.$.store": storeId,
+      //       },
+      //     },
+      //   },
+      //   { new: true },
+
+      // );
     }
   });
 });
@@ -73,6 +96,23 @@ storeRouter.put("/updateStore", async (req, res) => {
     { new: true }
   );
   res.status(200).json(updatedStore);
+});
+
+storeRouter.post("/filterStore", async (req, res) => {
+  const { categories, search } = req.body;
+  console.log(categories, search, req.body);
+  if (categories?.length > 0) {
+    const filteredStore = await storeModel.find({
+      name: { $regex: search, $options: "i" },
+      category: { $in: categories },
+    });
+    res.send(filteredStore);
+  } else {
+    const filteredStore = await storeModel.find({
+      name: { $regex: search, $options: "i" },
+    });
+    res.send(filteredStore);
+  }
 });
 
 module.exports = storeRouter;

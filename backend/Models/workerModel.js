@@ -5,16 +5,20 @@ const WorkerSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      require: true,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
     },
     category: [String],
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
     images: [{ type: String }],
     rating: {
