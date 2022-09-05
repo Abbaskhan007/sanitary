@@ -53,7 +53,7 @@ function ProductCard({ product, seller, fetchProducts }) {
           </div>
         </div>
       )}
-      <img className="w-full flex-1 object-cover max-h-[250px]" src={product.images[0]} />
+      <img className="w-full flex-1 object-cover max-h-[250px]" src={product.images[0].url} />
       <div className="p-2 px-4">
         <p className="text-lg font-semibold my-1">{product.name}</p>
         <p className="text-md font-medium">Rs. {product.price}</p>

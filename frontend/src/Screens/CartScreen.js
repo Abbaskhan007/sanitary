@@ -5,15 +5,17 @@ import CartItem from "../Components/CartItem";
 import ProductSummary from "../Components/productSummary";
 
 function CartScreen({ cart }) {
+  console.log("Cart_________", cart);
   if (cart.length <= 0) {
     return (
       <div className="flex flex-1 items-center justify-center flex-col h-full  mt-32">
-        
         <img
           className="w-[300px] m-0 "
           src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1657900283/vector-shopping-cart-icon-paper-sticker-with-shadow-colored-shopping-symbol-isolated_118339-1774-removebg_s1coie.png"
         />
-        <p className="text-2xl -mt-12 text-gray-500 font-semibold">No items present in the cart</p>
+        <p className="text-2xl -mt-12 text-gray-500 font-semibold">
+          No items present in the cart
+        </p>
       </div>
     );
   }
@@ -25,7 +27,11 @@ function CartScreen({ cart }) {
         ))}
       </div>
       <div style={{ flex: 1 }}>
-        <ProductSummary cartData={cart} />
+        <ProductSummary
+          buttonText="Place Order"
+          cartData={cart}
+          path="/shipping"
+        />
       </div>
     </div>
   );

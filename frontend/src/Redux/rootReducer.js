@@ -1,6 +1,8 @@
 import { createStore, compose, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import blockchainReducer from "./Reducer.js/blockchainReducer";
 import { cartReducer } from "./Reducer.js/cartReducer";
+import { categoryReducer } from "./Reducer.js/categoryReducer";
 import { modalReducer } from "./Reducer.js/modalReducer";
 import { productReducer } from "./Reducer.js/productReducer";
 import { sellerReducer } from "./Reducer.js/sellerReducer";
@@ -18,6 +20,7 @@ const reducer = combineReducers({
   worker: workerReducer,
   model: modalReducer,
   seller: sellerReducer,
+  categories: categoryReducer,
 });
 
 export const store = createStore(

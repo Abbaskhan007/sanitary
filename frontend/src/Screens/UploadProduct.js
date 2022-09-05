@@ -72,7 +72,7 @@ function UploadProduct({ seller }) {
             "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
             imageData
           );
-          return response.data.url;
+          return { url: response.data.url, public_id: response.data.public_id };
         })
       );
       console.log("Uploaded Images", uploadedImages);

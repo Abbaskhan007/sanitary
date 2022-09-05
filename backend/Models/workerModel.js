@@ -40,6 +40,7 @@ const WorkerSchema = mongoose.Schema(
           type: mongoose.Types.ObjectId,
           ref: "user",
         },
+        rating: Number,
       },
     ],
   },

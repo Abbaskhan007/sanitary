@@ -63,7 +63,7 @@ function ProfileScreen({ user, logout }) {
               : undefined
           }
           className="text-gray-400 text-medium my-3 flex items-center space-x-3 px-8"
-          to="reviews"
+          to={`reviews?user=${user._id}`}
         >
           <IoChatboxOutline size={18} />
           <p>My reviews</p>

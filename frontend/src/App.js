@@ -21,6 +21,9 @@ import EditStore from "./Screens/EditStore";
 import WorkerDashboard from "./Screens/WorkerDashboard";
 import EditProduct from "./Screens/EditProduct";
 import ProtectRoute from "./Components/ProtectRoute";
+import BlockchainPaymentScreen from "./Components/BlockchainPaymentScreen";
+import ViewOrderScreen from "./Screens/ViewOrderScreen";
+import ImageSearch from "./Screens/ImageSearch";
 
 function App({ model }) {
   console.log("Model******", model);
@@ -30,6 +33,7 @@ function App({ model }) {
         <Header />
         <Routes>
           <Route path="/" element={<HomeScreen />} />
+          <Route path="/imageSearch" element={<ImageSearch />} />
           <Route path="products/:productId" element={<ProductDetails />} />
           <Route path="editProduct/:productId" element={<EditProduct />} />
           <Route path="login" element={<Login />} />
@@ -42,6 +46,11 @@ function App({ model }) {
           <Route path="shipping" element={<Shipping />} />
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
+          <Route path="ViewOrder/:orderId" element={<ViewOrderScreen />} />
+          <Route
+            path="blockchainPayment"
+            element={<BlockchainPaymentScreen />}
+          />
 
           <Route
             path="profile/:userId/*"

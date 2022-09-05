@@ -1,11 +1,11 @@
 import React from "react";
 import { IoStarHalfSharp, IoStarOutline, IoStarSharp } from "react-icons/io5";
 
-export default function RatingStars({ rating }) {
+export default function RatingStars({ rating,  }) {
   if (rating < 0.5) {
     return (
       <div className="flex flex-row -ml-1">
-        <IoStarOutline className="text-yellow-400 text-lg" />
+        <IoStarOutline className="text-yellow-400 text-lg"  />
         <IoStarOutline className="text-yellow-400 text-lg" />
         <IoStarOutline className="text-yellow-400 text-lg" />
         <IoStarOutline className="text-yellow-400 text-lg" />
@@ -104,7 +104,7 @@ export default function RatingStars({ rating }) {
     );
   } else if (rating == 5) {
     return (
-      <div>
+      <div className="flex flex-row">
         <IoStarSharp className="text-yellow-400 text-lg" />
         <IoStarSharp className="text-yellow-400 text-lg" />
         <IoStarSharp className="text-yellow-400 text-lg" />

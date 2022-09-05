@@ -70,7 +70,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
       images: cloudinaryImages,
       user: user._id,
       categories: categoriesValue,
-      city
+      city,
     };
     console.log("Data", workerData);
     try {
@@ -93,7 +93,11 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
 
   return (
     <div>
-      <button disabled={user.isWorker} onClick={openModel} className="bg-green-200 w-52 p-3 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed">
+      <button
+        disabled={user.isWorker}
+        onClick={openModel}
+        className="bg-green-200 w-52 p-3 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+      >
         Send Worker Request
       </button>
       {showModel ? (

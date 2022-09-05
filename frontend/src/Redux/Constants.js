@@ -35,5 +35,8 @@ export const MODEL_OPEN = "model_open";
 export const MODEL_CLOSE = "model_close";
 export const DELETE_ACCOUNT = "delete_account";
 
+export const GET_CATEGORIES = "get_categories";
+export const GET_WORKERS_CATEGORIES = "get_workers_categories";
+
 export const FETCH_SELLER_DATA = "fetch_seller_data";
 export const Filter_Products = "filter_products";

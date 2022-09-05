@@ -5,6 +5,14 @@ const storeModel = require("../Models/storeModel");
 const sellerModel = require("../Models/sellerModel");
 const mongoose = require("mongoose");
 const cartModel = require("../Models/cartModel");
+const cloudinary = require("cloudinary").v2;
+const https = require("https");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 router.post("/addProduct", (req, res) => {
   const data = req.body;
@@ -67,7 +75,11 @@ router.post("/searchProduct", (req, res) => {
 
 router.get("/getProduct/:id", async (req, res) => {
   const id = req.params.id;
-  const productData = await productModel.findById(id).populate("store");
+  const productData = await productModel
+    .findById(id)
+    .populate("store")
+    .populate("reviews.user");
+  console.log("Product Data", productData);
   res.status(200).send(productData);
 });
 
@@ -134,6 +146,16 @@ router.post("/filteredProducts", (req, res) => {
       res.status("200").send(data);
     }
   );
+});
+
+router.post("/imageSearch", async (req, res) => {
+  const images = req.body;
+  console.log("Public _id: ", images);
+  const products = await productModel.find({
+    "images.public_id": { $in: images },
+  });
+  console.log("Products", products);
+  res.json(products);
 });
 
 module.exports = router;

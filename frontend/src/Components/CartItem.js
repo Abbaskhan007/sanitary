@@ -72,7 +72,7 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct, produ
 
       <img
         className="w-52 h-52 rounded-tl-md rounded-bl-md "
-        src={item.product?.images[0]}
+        src={item.product?.images[0].url}
       />
       <div className="p-2 px-6">
         <p className="text-md font-bold my-1">{item.product.name}</p>

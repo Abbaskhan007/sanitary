@@ -12,8 +12,14 @@ const productSchema = mongoose.Schema(
     },
     images: [
       {
-        type: String,
-        required: true,
+        url: {
+          type: String,
+          required: true,
+        },
+        public_id: {
+          type: String,
+          required: true,
+        },
       },
     ],
     category: [{ type: String, required: true }],
@@ -30,7 +36,9 @@ const productSchema = mongoose.Schema(
     },
     rating: {
       type: Number,
+      default: 0,
     },
+    ratings: [{ type: Number, default: [] }],
     numRating: {
       type: Number,
       default: 0,
@@ -42,6 +50,7 @@ const productSchema = mongoose.Schema(
           ref: "user",
         },
         message: String,
+        rating: Number,
       },
     ],
     price: {

@@ -14,6 +14,7 @@ import PriceSlider from "../Components/PriceSlider";
 import Filter from "../Components/Filter";
 import { IoSearch } from "react-icons/io5";
 import { FiFilter } from "react-icons/fi";
+import ImageSearch from "./ImageSearch";
 
 function HomeScreen({ fetchProducts, productList, searchHandler }) {
   const [showFilter, setShowFilter] = useState(false);
@@ -43,7 +44,9 @@ function HomeScreen({ fetchProducts, productList, searchHandler }) {
             placeholder="Search product"
             onChange={e => onSearch(e.target.value)}
           />
+          <ImageSearch />
         </div>
+
         <div
           onClick={() => setShowFilter(!showFilter)}
           className="flex cursor-pointer space-x-2 items-center border-2 border-gray-400 p-[6px] px-3 rounded-md"

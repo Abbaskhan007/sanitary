@@ -109,7 +109,7 @@ export default function EditProduct() {
             "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
             imageData
           );
-          return response.data.url;
+          return { url: response.data.url, public_id: response.data.public_id };
         })
       );
       console.log("Uploaded Images (2)", uploadedImages);
@@ -217,7 +217,6 @@ export default function EditProduct() {
               Product Category
             </label>
             <Select
-              isMulti
               name="categories"
               options={data}
               className="basic-multi-select"
@@ -247,7 +246,7 @@ export default function EditProduct() {
                   <div className="relative group hover:bg-black hover:rounded-md">
                     <img
                       className="rounded-md shadow-md h-full group-hover:opacity-50 "
-                      src={image}
+                      src={image.url? image.url : image}
                     />
                     <IoCloseOutline
                       onClick={() => onDelete(image)}

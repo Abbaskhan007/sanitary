@@ -1,7 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import StripePayment from "./StripePayment";
 
-export default function ProductSummary({ cartData }) {
+export default function ProductSummary({
+  cartData,
+  buttonText,
+  path,
+  setAmount,
+  paymentMethod = "",
+}) {
   console.log("Cart Data-----", cartData);
   const navigate = useNavigate();
   const totalPrice = cartData.reduce((total, current) => {
@@ -9,9 +16,13 @@ export default function ProductSummary({ cartData }) {
       total + parseFloat(current.product.price) * parseInt(current.quantity)
     );
   }, 0);
-  const items = cartData.reduce((total, current) => {
+  const items = cartData.reduce((total, current, paymentMethod) => {
     return total + current.quantity;
   }, 0);
+  console.log("set Amount______", setAmount);
+  if (setAmount) {
+    setAmount(totalPrice);
+  }
   console.log("Items", items);
   return (
     <div className="shadow-lg border-2  border-gray-100 p-4 rounded-lg">
@@ -34,9 +45,12 @@ export default function ProductSummary({ cartData }) {
       </div>
       <div
         className="bg-violet-500 text-white text-center text-lg font-semibold p-2 mt-2 rounded-md cursor-pointer"
-        onClick={() => navigate("/shipping")}
+        onClick={() => navigate(path, { state: { amount: totalPrice } })}
       >
-        Proceed to Checkout
+        {buttonText}
+      </div>
+      <div>
+        {paymentMethod === "bank" && <StripePayment amount={totalPrice} />}
       </div>
     </div>
   );

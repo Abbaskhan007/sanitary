@@ -18,6 +18,7 @@ import EditStore from "./EditStore";
 import EditProduct from "./EditProduct";
 import UploadProduct from "./UploadProduct";
 import StoreDetail from "./StoreDetail";
+import SellerOrders from "./SellerOrders";
 
 export default function SellerDashboard() {
   return (
@@ -74,6 +75,18 @@ export default function SellerDashboard() {
           <AiOutlineShopping size={18} />
           <p>Create Store</p>
         </NavLink>
+        <NavLink
+          style={({ isActive }) =>
+            isActive
+              ? { borderRightColor: "#8b62f3", borderRightWidth: "4px" }
+              : undefined
+          }
+          className="text-gray-400 text-medium my-3 flex items-center space-x-4 px-8"
+          to="orders"
+        >
+          <BsCart3 size={18} />
+          <p>My Orders</p>
+        </NavLink>
       </div>
       <div className="flex-1 ml-[250px]">
         <Routes>
@@ -83,7 +96,7 @@ export default function SellerDashboard() {
           <Route path="/stores/:storeId/*" element={<StoreDetail />} />
           <Route path="/createStore" element={<CreateStore />} />
           <Route path="/editStore/:storeId" element={<EditStore />} />
-
+          <Route path="/orders" element={<SellerOrders />} />
           <Route
             path="/editStore/:storeId/uploadProduct"
             element={<UploadProduct />}
