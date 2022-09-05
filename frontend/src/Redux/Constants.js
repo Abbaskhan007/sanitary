@@ -35,6 +35,8 @@ export const MODEL_OPEN = "model_open";
 export const MODEL_CLOSE = "model_close";
 export const DELETE_ACCOUNT = "delete_account";
 
-// const PRODUCT_DETAILS_REQUEST = "product_details_request";
-// const PRODUCT_DETAILS_REQUEST_SUCCESS = "product_fetch_request";
-// const PRODUCT_DETAILS_REQUEST_FAIL = "product_fetch_request";
+export const GET_CATEGORIES = "get_categories";
+export const GET_WORKERS_CATEGORIES = "get_workers_categories";
+
+export const FETCH_SELLER_DATA = "fetch_seller_data";
+export const Filter_Products = "filter_products";

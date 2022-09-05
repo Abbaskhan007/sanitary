@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RatingStars from "../Components/RatingStars";
 import moment from "moment";
+import Axios from "axios";
+import ReviewBox from "../Components/ReviewBox";
 
-export default function StoreDescriptionScreen({ description }) {
+export default function StoreDescriptionScreen({ description, user }) {
   console.log("Description", description);
+  const [reviews, setReviews] = useState([]);
+  const fetchReviews = async () => {
+    const { data } = await Axios.post("/api/orders/getReviews", {
+      storeId: description._id,
+    });
+    console.log("data of reviews", data);
+    setReviews(data);
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
   return (
     <div>
       <p className="text-xl font-medium my-1">
@@ -45,19 +59,23 @@ export default function StoreDescriptionScreen({ description }) {
         <div className="flex items-center space-x-2 ">
           <img
             className="w-16 h-16 p-1 border-2 border-gray-300 rounded-full"
-            src={description.seller.user.profileImage}
+            src={description.seller?.user?.profileImage}
           />
-          <p className="text-lg font-medium">{description.seller.user.name}</p>
+          <p className="text-lg font-medium">
+            {description.seller?.user?.name}
+          </p>
           <p className="text-sm text-gray-400">({description.seller.rating})</p>
         </div>
-        <p className="my-2">{description.seller.description}</p>
+        <p className="my-2 text-left ml-8">{description.seller.description}</p>
       </div>
-      <div>
-        <p className="text-2xl ">Rating and Reviews</p>
+      <div className=" text-left">
+        <p className="text-lg text-center underline underline-offset-4 my-4">
+          Ratings and Reviews
+        </p>
         <div>
-          {description.products.map(item =>
-            item.reviews.map(review => <div>{review.message}</div>)
-          )}
+          {reviews.map(review => (
+            <ReviewBox review={review} />
+          ))}
         </div>
       </div>
     </div>

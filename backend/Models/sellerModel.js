@@ -31,7 +31,15 @@ const sellerSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      require: true,
+      required: true,
+    },
+    contractAddress: {
+      type: String,
+      required: true,
+    },
+    accountNumber: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

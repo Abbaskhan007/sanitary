@@ -22,26 +22,31 @@ function PaymentMethodScreen({ user, savePaymentMethod }) {
   return (
     <div>
       <CheckoutSteps className="px-12" step={3} />
-      <div className="w-[500px] -mt-12 h-[calc(100vh-180px)] flex flex-col  mx-auto  justify-center">
-        <p className="text-lg font-semibold mb-4">Payment Method</p>
-        <div className="mb-2">
-          <input
-            name="payment"
-            value="bank"
-            type="radio"
-            onChange={e => setPaymentMethod(e.target.value)}
-            checked="checked"
+      <div className="w-[500px] -mt-12 min-h-[calc(100vh-180px)] flex flex-col  mx-auto  justify-center">
+        <p className="text-2xl font-semibold  mt-12 mb-8 text-center ">
+          Payment Method
+        </p>
+        <div className="mb-2 ">
+          <label className="font-semibold ">Bank Transfer</label>
+          <img
+            src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1660668034/Screen_Shot_2022-08-16_at_8.33.09_PM_qfcrpp.png"
+            className={`w-[350px] h-[200px] cursor-pointer rounded-md shadow-md mb-8 mt-2 ${
+              paymentMethod === "bank" &&
+              "scale-110 ease-in-out-300 duration-300 mt-4" 
+            } `}
+            onClick={() => setPaymentMethod("bank")}
           />
-          <label className="font-semibold ml-2">Bank Transfer</label>
         </div>
         <div className="mb-2">
-          <input
-            name="payment"
-            value="blockchain"
-            onChange={e => setPaymentMethod(e.target.value)}
-            type="radio"
+          <label className="font-semibold ">Blockchain</label>
+          <img
+            src="https://www.simplilearn.com/ice9/free_resources_article_thumb/how_to_start_a_career_in_blockchain_technology.jpg"
+            className={`w-[350px] h-[200px] cursor-pointer rounded-md shadow-md my-2 ${
+              paymentMethod === "blockchain" &&
+              "scale-110 ease-in-out-300 duration-300 mt-4"
+            }`}
+            onClick={() => setPaymentMethod("blockchain")}
           />
-          <label className="font-semibold ml-2">Blockchain</label>
         </div>
         <div
           onClick={onSubmitHandler}

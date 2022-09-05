@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import CheckoutSteps from "../Components/CheckoutSteps";
 import { connect } from "react-redux";
 import OrderItem from "../Components/OrderItem";
 import ProductSummary from "../Components/productSummary";
 
 function OrderDetails({ shipping, cart, paymentMethod }) {
+  const [amount, setAmount] = useState(0);
+  console.log("Amount", amount, paymentMethod);
+
   return (
     <div className="p-4">
       <CheckoutSteps step={4} />
@@ -38,7 +41,13 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
           </div>
         </div>
         <div>
-          <ProductSummary cartData={cart} />
+          <ProductSummary
+            buttonText="Pay Now"
+            path="/blockchainPayment"
+            cartData={cart}
+            setAmount={setAmount}
+            paymentMethod={paymentMethod}
+          />
         </div>
       </div>
     </div>
@@ -46,7 +55,7 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(")_", state.cart);
   return {
     shipping: state.cart.shipping,
     cart: state.cart.cart,
