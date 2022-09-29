@@ -69,32 +69,31 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct, produ
         className="text-violet-500 text-lg absolute -top-[10px] -right-[10px] z-30 bg-white cursor-pointer"
         size={24}
       />
-
       <img
-        className="w-52 h-52 rounded-tl-md rounded-bl-md "
+        className="sm:w-52 sm:h-52 w-36 h-36 rounded-tl-md rounded-bl-md "
         src={item.product?.images[0].url}
       />
-      <div className="p-2 px-6">
-        <p className="text-md font-bold my-1">{item.product.name}</p>
-        <p className="text-md font-medium mb-1">Rs: {item.product.price}</p>
-        <p className=" text-gray-500 italic my-1">{item.product.description}</p>
-        <p>
-          <span className="font-medium">Category: </span>
-          <span className="text-gray-500">Basin's</span>
+      <div className="sm:p-2 sm:px-6 p-1 px-4">
+        <p className="text-md sm:font-bold font-semibold sm:my-1 my-[2px]">{item.product.name}</p>
+        <p className="sm:text-md text-sm font-medium sm:mb-1 mb-[2px]">Rs: {item.product.price}</p>
+        <p className=" text-gray-500 sm:inline-flex hidden italic my-1">{item.product.description}</p>
+        <p className="mb-2">
+          <span className="sm:font-medium sm:text-base text-sm ">Category: </span>
+          <span className="text-gray-500 sm:text-base text-sm">Basin's</span>
         </p>
-        <p className="flex-1 my-3">
+        <p className="flex-1 sm:mt-3 sm:mb-3 mt-3 ">
           <div className="flex items-center ">
             <p
               className="bg-gray-50 py-3 p-3 border border-gray-200"
               onClick={() => qtyHandler(-1)}
             >
-              <AiOutlineMinus className="text-lg font-thin" />
+              <AiOutlineMinus className="sm:text-lg text-medium font-thin" />
             </p>
             <input
               placeholder="1"
               type="number"
               value={qty}
-              className="w-16 py-[9px]  text-center outline-0  border-t border-b border-gray-200"
+              className="sm:w-16 w-12 sm:py-[9px] py-[8px]  text-center outline-0  border-t border-b border-gray-200"
               onChange={e => inputHandler(e.target.value)}
               min={1}
             />
@@ -103,7 +102,7 @@ function CartItem({ item, addToCartLocal, updateCart, user, deleteProduct, produ
               className="bg-gray-50 py-3 p-3 border border-gray-200"
               onClick={() => qtyHandler(1)}
             >
-              <IoAddOutline className="text-lg font-thin" />
+              <IoAddOutline className="sm:text-lg text-medium font-thin" />
             </p>
           </div>
         </p>

@@ -5,7 +5,7 @@ const sellerSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      require: true,
+      required: true,
     },
     categories: [String],
     store: [
@@ -35,11 +35,9 @@ const sellerSchema = new mongoose.Schema(
     },
     contractAddress: {
       type: String,
-      required: true,
     },
     accountNumber: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }

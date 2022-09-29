@@ -93,20 +93,21 @@ function EditStore({ products }) {
 
   return (
     <div className="min-h-[calc(100vh-150px)] ">
-      <div className="px-12 flex items-center justify-center">
-        <div className="flex  justify-center flex-col w-[500px] py-8">
-          <h1 className="text-3xl font-medium mb-8 text-center">Edit Store</h1>
+      <div className="sm:px-12 px-4 flex items-center justify-center">
+        <div className="flex  justify-center flex-col sm:w-[500px] py-8">
+          <h1 className="sm:text-3xl text-lg font-medium mb-8 text-center">Edit Store</h1>
           {error && <ErrorBox variant="fail" message={error} />}
           <div
             onClick={() => imageRef.current.click()}
-            className="max-w-max relative  rounded-full mb-8 mt-4 cursor-pointer"
+            className="max-w-max relative self-center  rounded-full mb-8 mt-4 cursor-pointer"
           >
             <MdModeEditOutline
-              className="absolute right-8 top-6 bg-black opacity-50 p-1 rounded-full  text-white"
+              className="absolute sm:right-8 sm:bottom-2 right-4 bottom-1 bg-black/50 p-1 rounded-full  text-white"
               size={24}
+              color="#fff"
             />
             <img
-              className="w-48 h-48 rounded-full  mx-auto border"
+              className="sm:w-48 sm:h-48 h-32 w-32 rounded-full self-center  mx-auto border"
               src={showImage ? showImage : image}
             />
           </div>

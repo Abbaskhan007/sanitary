@@ -48,8 +48,8 @@ function UserOrdersScreen({ navigation, user, admin }) {
   console.log("Order Id", orderId);
   console.log("Orders__________", orders);
   return (
-    <div className="px-12 py-8 box-border ">
-      <div className="flex flex-row items-center justify-between  px-20 mb-6">
+    <div className="sm:px-12 sm:py-8 w-[300px] sm:w-[450px] md:w-[570px] lg:w-[800px] p-4 pt-8 mx-auto  overflow-hidden ">
+      <div className="flex flex-row items-center justify-between  sm:px-6 mb-6 ">
         {model && <ViewOrderScreen orderId={orderId} setModel={setModel} />}
         <h6
           className={` ${
@@ -59,7 +59,7 @@ function UserOrdersScreen({ navigation, user, admin }) {
           }  `}
           onClick={() => setActiveTab("all")}
         >
-          All Orders
+          All 
         </h6>
         <h6
           className={`${
@@ -93,15 +93,15 @@ function UserOrdersScreen({ navigation, user, admin }) {
         </h6>
       </div>
       <div
-        className={`md:w-[500px] lg:w-[800px] xl:w-[1000px]  overflow-x-scroll`}
+        className={`overflow-x-scroll`}
       >
-        <table>
+        <table className="">
           <thead class="border-b bg-gray-200">
             <tr>
               {tableHeader.map(item => (
                 <th
                   scope="col"
-                  class="text-sm font-medium text-gray-900 px-6 py-4 text-left whitespace-nowrap"
+                  class="sm:text-sm text-xs font-medium text-gray-900 px-5 py-3 text-left whitespace-nowrap"
                 >
                   {item}
                 </th>
@@ -124,7 +124,7 @@ function UserOrdersScreen({ navigation, user, admin }) {
                   {order.customerId.name}
                 </td>
                 <td class="text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  <img className="rounded-md" src={order.productId.images[0]} />
+                  <img className="rounded-md" src={order.productId.images[0].url} />
                 </td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {order.paymentMethod === "bank" ? "Rs. " : "Eth: "}

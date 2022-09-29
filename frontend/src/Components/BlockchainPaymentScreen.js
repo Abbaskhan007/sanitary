@@ -4,8 +4,9 @@ import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../utils/constants";
 import { connect } from "react-redux";
 import Axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import { EMPTY_CART } from "../Redux/Constants";
 
 function BlockchainPaymentScreen({
   user,
@@ -13,8 +14,10 @@ function BlockchainPaymentScreen({
   paymentMethod,
   products,
   cart,
+  emptyCart,
 }) {
   const WALLET_ADDRESS = "0x917A2Eb08f1374608d8afe2Ddf32efb70144Fd75";
+  const navigate = useNavigate();
   console.log("Products________", products, "cart_______", cart);
   const location = useLocation();
   const { amount } = location.state;
@@ -25,8 +28,9 @@ function BlockchainPaymentScreen({
     localStorage.getItem("transactionCount")
   );
   const [transactions, setTransactions] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const { ethereum } = window;
-
+  console.log("------", user, shippingAddress, paymentMethod, products, cart);
   const convertToEtherium = async () => {
     const { data } = await Axios.get(
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=pkr&ids=ethereum"
@@ -157,8 +161,10 @@ function BlockchainPaymentScreen({
           console.log("Data", data);
         });
         console.log("PRomises", promise);
-        Promise.all(promise);
-
+        Promise.all(promise).then(() => {
+          console.log("-----------");
+        });
+        setShowModal(true);
         console.log(`Success - ${transactionHash.hash}`);
         setIsLoading(false);
 
@@ -192,6 +198,57 @@ function BlockchainPaymentScreen({
     }
   }, [currentAccount, etheriumPrice]);
 
+  const onOk = () => {
+    emptyCart(user);
+    navigate("/");
+    setShowModal(false);
+  };
+
+  const Model = () => {
+    return (
+      <>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            {/*content*/}
+            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              {/*header*/}
+              <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                <h3 className="sm:text-2xl text-xl font-semibold">
+                  Order Completed
+                </h3>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={() => setShowModal(false)}
+                >
+                  <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    ×
+                  </span>
+                </button>
+              </div>
+              {/*body*/}
+              <div className="relative p-6 flex-auto">
+                <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                  Order Placed Successfully. Thank you for purchasing.
+                </p>
+              </div>
+              {/*footer*/}
+              <div className="flex items-center justify-end p-2 rounded-b">
+                <button
+                  className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-8 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={onOk}
+                >
+                  Ok
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </>
+    );
+  };
+
   console.log("Current Account: ", currentAccount);
 
   if (isLoading) {
@@ -200,6 +257,7 @@ function BlockchainPaymentScreen({
 
   return (
     <div className="flex flex-1 items-center justify-center">
+      {showModal && <Model />}
       Sending Etherium
     </div>
   );
@@ -222,7 +280,17 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    emptyCart: async userId => {
+      console.log("Emptying Cart------");
+      const { data } = await Axios.delete(`/api/cart/emptyCart/${userId}`);
+      console.log("Data of empty cart-----", data);
+      dispatch({ type: EMPTY_CART });
+    },
+  };
 };
 
-export default connect(mapStateToProps)(BlockchainPaymentScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlockchainPaymentScreen);

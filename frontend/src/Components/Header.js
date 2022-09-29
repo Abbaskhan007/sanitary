@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { BsCart } from "react-icons/bs";
+import { HiOutlineMenu } from "react-icons/hi";
+
 import Axios from "axios";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +23,7 @@ function Header({
   searchHandler,
   store,
   products,
+  setShow,
 }) {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -33,16 +36,18 @@ function Header({
 
   console.log("Cart", cart);
   return (
-    <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-2 px-6 z-50">
+    <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-2 px-6 z-30 ">
       <div>
         <img
           onClick={() => navigate("/")}
-          className="h-12 cursor-pointer"
-          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1655596086/d67b2b3ff423426fa14186e9aeb3befd_1_afk97o.png"
+          className="h-10 w-10 cursor-pointer sm:inline-flex hidden"
+          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1664201584/sanitary-store/smart_sanitary-logos_transparent_qdal5i.png"
         />
-       
+        <div onClick={() => setShow(true)} className="cursor-pointer sm:hidden">
+          <HiOutlineMenu color="#fff" size={26} />
+        </div>
       </div>
-      <div className="flex items-center justify-between ">
+      <div className="sm:flex hidden items-center justify-between ">
         <NavLink
           style={({ isActive }) =>
             isActive
@@ -78,7 +83,6 @@ function Header({
         </NavLink>
       </div>
       <div className="flex items-center">
-        
         <div className="relative">
           <Link to="cart">
             <BsCart className="text-white text-2xl cursor-pointer" />
@@ -89,7 +93,7 @@ function Header({
           </Link>
         </div>
         {user.name ? (
-          <div className="relative group transition ease-out-500 duration-500 h-full cursor-pointer ml-4 min-w-[160px]   ">
+          <div className="relative group transition ease-in-out-500 duration-500 h-full cursor-pointer sm:ml-4 min-w-[160px] -mr-4  ">
             <img
               src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png"
               className="cursor-pointer h-10  w-10 rounded-full p-1 border border-white mx-auto"

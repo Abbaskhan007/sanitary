@@ -6,7 +6,7 @@ export default function WorkerCard({ worker }) {
   return (
     <Link
       to={`/workers/${worker._id}`}
-      className="border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out-300 duration: 300 overflow-hidden flex flex-col"
+      className="border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out duration-300 delay-100 overflow-hidden flex flex-col"
     >
       <img className="flex-1 object-cover max-h-[250px]" src={worker.images[0]} />
       <div className="p-2 px-4">

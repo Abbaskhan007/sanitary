@@ -40,7 +40,7 @@ export default function ViewOrderScreen({ setModel, orderId }) {
 
   return (
     <div className="bg-black/50 fixed inset-0 -bottom-3  align-middle flex items-center justify-center z-50">
-      <div className="bg-white w-[500px] relative opacity-100 p-6 shadow-lg rounded-md flex-col overflow-y-scroll max-h-[calc(100vh-160px)]">
+      <div className="bg-white sm:w-[500px] w-[90%] relative opacity-100 sm:p-6 p-3 py-8 shadow-lg rounded-md flex-col overflow-y-scroll max-h-[calc(100vh-160px)]">
         <IoCloseOutline
           onClick={onClose}
           size={24}
@@ -50,7 +50,7 @@ export default function ViewOrderScreen({ setModel, orderId }) {
           <Loading />
         ) : (
           <div>
-            <Slider />
+            <Slider images={orderData.productId.images}/>
             <div className="flex flex-row items-center space-x-2 mb-4 mt-8">
               <p className="font-medium">Name: </p>
               <p className="">{orderData?.productId?.name}</p>
@@ -113,7 +113,7 @@ export default function ViewOrderScreen({ setModel, orderId }) {
                 {orderData?.amount}
               </p>
             </div>
-            {orderData?.rating ? (
+            {!orderData?.rating ? (
               <div>
                 <p className="font-medium">My Rating: </p>
                 {/* <StarRa rating={orderData?.rating} /> */}

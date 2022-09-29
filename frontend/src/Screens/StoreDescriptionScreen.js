@@ -20,11 +20,16 @@ export default function StoreDescriptionScreen({ description, user }) {
   }, []);
   return (
     <div>
-      <p className="text-xl font-medium my-1">
-        Category: {description.category}
-      </p>
-      <div className="grid grid-cols-4 gap-12 my-6">
-        <div className="shadow-lg border-2 border-gray-100 flex py-4 rounded-md items-center justify-center flex-col">
+      <div className="text-xl  font-medium my-1 sm:flex justify-center">
+        Categories:{" "}
+        <div className="flex flex-row mt-3 sm:mt-0 flex-wrap">
+        {description?.category?.map(ctg => (
+          <p className="text-sm bg-gray-200 ml-4 py-2 px-4 text-gray-500 font-semibold rounded-md ">{ctg}</p>
+        ))}
+        </div>
+      </div>
+      <div className="grid lg:grid-cols-4  grid-cols-2 sm sm:gap-12 gap-4 my-6">
+        <div className="shadow-lg border-2 border-gray-100 flex py-4 rounded-lg items-center justify-center flex-col">
           <p className="text-xl font-semibold mb-2">Rating</p>
           <div className="flex items-center space-x-2">
             <RatingStars rating={description.rating} />

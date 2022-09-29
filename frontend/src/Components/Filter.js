@@ -5,11 +5,19 @@ import { connect } from "react-redux";
 import { PRODUCT_FETCH_REQUEST_FAIL, PRODUCT_SEARCH } from "../Redux/Constants";
 import PriceSlider from "./PriceSlider";
 
-function Filter({ setShowFilter, showFilter, filterProducts, keyword }) {
+function Filter({
+  setShowFilter,
+  showFilter,
+  filterProducts,
+  keyword,
+  categoryTypes,
+}) {
   const [value, setValue] = useState({ min: 1, max: 50000 });
   const [categories, setCategories] = useState([]);
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(50000);
+
+  console.log("------", categoryTypes);
 
   const data = [
     { label: "Basins", value: "basin" },
@@ -54,7 +62,7 @@ function Filter({ setShowFilter, showFilter, filterProducts, keyword }) {
   return (
     <div
       style={showFilter ? fadein : fadeOut}
-      className={`  border-2 bg-gray-100 border-gray-300  py-4 px-12 rounded-md relative`}
+      className={`  border-2 bg-gray-100 border-gray-300  py-4 sm:px-12 px-6  rounded-md relative`}
     >
       <div
         onClick={() => setShowFilter(false)}
@@ -98,16 +106,16 @@ function Filter({ setShowFilter, showFilter, filterProducts, keyword }) {
       />
       <div className="-mt-4 mb-8">
         <p className="text-2xl text-gray-600  text-center">Categories</p>
-        <div className="grid grid-cols-3 gap-8  sm:grid-cols-5 mt-5">
-          {data.map(item => (
-            <div className="flex space-x-4">
+        <div className="grid  grid-cols-2 sm:gap-8 sm:grid-cols-5 mt-5">
+          {categoryTypes.map(item => (
+            <div className="flex items-center mb-6 sm:space-x-4 space-x-[6px]">
               <input
-                className="w-8"
+                className="w-6 h-6 "
                 type="checkbox"
                 value={item.value}
                 onChange={e => checkboxChange(e, item.label)}
               />
-              <p className="text-xl font-medium ">{item.label}</p>
+              <p className="sm:text-xl text-md font-medium ">{item.label}</p>
             </div>
           ))}
         </div>
@@ -123,13 +131,19 @@ function Filter({ setShowFilter, showFilter, filterProducts, keyword }) {
 }
 
 const mapStateToProps = state => {
-  return {};
+  const categoryTypes = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
+  return {
+    categoryTypes,
+  };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     filterProducts: async data => {
       try {
-        const  filteredData  = await Axios.post(
+        const filteredData = await Axios.post(
           `/api/products/filteredProducts`,
           data
         );

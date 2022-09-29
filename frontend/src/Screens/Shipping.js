@@ -35,7 +35,7 @@ function ShippingScreen({ user, saveShipping }) {
   console.log(name, address, city, country, postalCode);
 
   return (
-    <div className="px-12 min-h-[calc(100vh-150px)] ">
+    <div className="sm:px-12 px-6 min-h-[calc(100vh-150px)] ">
       <CheckoutSteps step={2} />
 
       <div className="flex items-center justify-center">

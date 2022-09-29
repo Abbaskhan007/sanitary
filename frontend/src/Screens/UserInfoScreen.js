@@ -85,12 +85,12 @@ function UserInfoScreen({ userData, updateProfile }) {
   }, [userData]);
   console.log(user, name, email);
   return (
-    <div className="flex flex-1 flex-col justify-center h-full w-full p-20">
+    <div className="flex flex-1 flex-col justify-center h-full w-full sm:p-20 p-8">
       {errorMsg && <ErrorBox variant="fail" message={errorMsg} />}
-      <div className="flex items-center space-x-8 relative">
+      <div className="flex items-center space-x-8 relative ">
         <img
           onClick={openImageSelecter}
-          className="w-32 h-32 rounded-full"
+          className="w-32 h-32 rounded-full "
           src={profileImage || "https://wallpaperaccess.com/full/2213424.jpg"}
         />
         <BiPencil
@@ -104,7 +104,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           type="file"
           onChange={imageChangeHandler}
         />
-        <div>
+        <div >
           <h3 className="text-2xl font-medium">{user.name}</h3>
           <h6 className="text-sm text-gray-500">Newyork, USA</h6>
         </div>
@@ -114,7 +114,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           <label className="text-sm my-1 text-gray-500">Name</label>
           <input
             onChange={e => setName(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={name}
             placeholder="Enter User Name"
           />
@@ -123,7 +123,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           <label className="text-sm my-1 text-gray-500">Email</label>
           <input
             onChange={e => setEmail(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={email}
             placeholder="Enter User Email"
           />
@@ -132,7 +132,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           <label className="text-sm my-1 text-gray-500">Phone Number</label>
           <input
             onChange={e => setPhoneNumber(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={phoneNumber}
             placeholder="Enter Phone Number"
           />
@@ -141,7 +141,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           <label className="text-sm my-1 text-gray-500">Address</label>
           <input
             onChange={e => setAddress(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={address}
             placeholder="Enter Your Address"
           />
@@ -152,7 +152,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           </label>
           <input
             onChange={e => setPassword(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={password}
             placeholder="Enter Your Current Password"
           />
@@ -161,7 +161,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           <label className="text-sm my-1 text-gray-500">New Password</label>
           <input
             onChange={e => setNewPassword(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={newPassword}
             placeholder="Enter New Password"
           />
@@ -172,7 +172,7 @@ function UserInfoScreen({ userData, updateProfile }) {
           </label>
           <input
             onChange={e => setConfirmPassword(e.target.value)}
-            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 w-[400px] "
+            className="outline-none border border-gray-300 px-4 py-1 rounded-md bg-gray-100 sm:w-[400px] "
             value={confirmPassword}
             placeholder="Confirm Your Password"
           />

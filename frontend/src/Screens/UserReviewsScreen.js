@@ -20,7 +20,7 @@ function UserReviewsScreen({ user }) {
   }, []);
 
   return (
-    <div className="p-8">
+    <div className="sm:p-8 p-4">
       <h2 className="text-lg font-medium text-center my-4">
         {user.name} Review
       </h2>

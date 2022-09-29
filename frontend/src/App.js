@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import HomeScreen from "./Screens/HomeScreen";
@@ -24,13 +25,17 @@ import ProtectRoute from "./Components/ProtectRoute";
 import BlockchainPaymentScreen from "./Components/BlockchainPaymentScreen";
 import ViewOrderScreen from "./Screens/ViewOrderScreen";
 import ImageSearch from "./Screens/ImageSearch";
+import Sidebar from "./Components/Sidebar";
 
-function App({ model }) {
-  console.log("Model******", model);
+function App() {
+  
+  const [show, setShow] = useState(false);
   return (
-    <div className={`relative min-h-[100vh] py-16`}>
+    <div className={`relative min-h-[100vh] py-12`}>
       <BrowserRouter>
-        <Header />
+        {show && <Sidebar show={show} setShow={setShow} />}
+        <Header show={show} setShow={setShow} />
+
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/imageSearch" element={<ImageSearch />} />

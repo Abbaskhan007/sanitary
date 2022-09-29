@@ -28,7 +28,7 @@ function StoreCard({ store, seller, fetchStoreData }) {
   return (
     <div
       onClick={() => navigate(`${store._id}`)}
-      className={`border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out-300 duration: 300 overflow-hidden flex flex-col ${
+      className={`border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out duration-300 delay-100 overflow-hidden flex flex-col ${
         store.seller?._id === seller && "group relative"
       }`}
     >
@@ -52,8 +52,15 @@ function StoreCard({ store, seller, fetchStoreData }) {
       )}
       <img className="flex-1 object-cover max-h-[250px]" src={store.image} />
       <div className="p-2">
-        <p className="text-lg font-semibold my-1">{store.name}</p>
-        <p className="text-md font-medium">Category: {store.category}</p>
+        <p className="text-lg font-medium mb-1">{store.name}</p>
+        <p className="text-sm font-medium">
+          Category: {store.category[0]}{" "}
+          {store.category.length > 1 && (
+            <span className="bg-gray-200 text-gray-500 py-2 px-3 rounded-md text-xs ml-2">
+              {store.category.length - 1} more
+            </span>
+          )}
+        </p>
         <div className=" py-2">
           <RatingStars rating={store.rating} />
         </div>

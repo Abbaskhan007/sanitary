@@ -5,14 +5,6 @@ const storeModel = require("../Models/storeModel");
 const sellerModel = require("../Models/sellerModel");
 const mongoose = require("mongoose");
 const cartModel = require("../Models/cartModel");
-const cloudinary = require("cloudinary").v2;
-const https = require("https");
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 router.post("/addProduct", (req, res) => {
   const data = req.body;
@@ -49,13 +41,27 @@ router.post("/addProduct", (req, res) => {
   // });
 });
 
+//changing*******
+
+// router.get("/getProducts", (req, res) => {
+//   productModel.find({}, (err, data) => {
+//     if (err) throw err;
+//     else {
+//       res.status("201").send(data);
+//     }
+//   });
+// });
+
 router.get("/getProducts", (req, res) => {
-  productModel.find({}, (err, data) => {
-    if (err) throw err;
-    else {
-      res.status("201").send(data);
-    }
-  });
+  productModel
+    .find({})
+    .populate("store")
+    .exec((err, data) => {
+      if (err) throw err;
+      else {
+        res.status("201").send(data);
+      }
+    });
 });
 
 router.post("/searchProduct", (req, res) => {

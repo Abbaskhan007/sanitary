@@ -24,9 +24,9 @@ export default function StoreDetail() {
     getStoreData();
   }, []);
   return (
-    <div>
-      <img className="w-full   object-fill h-[500px]" src={storeData.image} />
-      <div className="p-12 text-center">
+    <div >
+      <img className="w-full object-fill h-[500px]" src={storeData.image} />
+      <div className="sm:p-12 p-6 text-center">
         <span className="my-4 text-3xl font-medium text-center border-2 border-gray-400 p-2 px-4 text-gray-600">{storeData.name}</span>
         <p className="mb-8"></p>
 

@@ -9,7 +9,7 @@ export default function ReviewBox({ review }) {
   const [model, setModel] = useState(false);
   const navigation = useNavigate();
   return (
-    <div className="w-[500px] mb-6 mx-auto shadow-lg bg-white border-2 border-gray-100 p-4 rounded-lg">
+    <div className="sm:w-[500px] mb-6 mx-auto shadow-lg bg-white border-2 border-gray-100 p-4 rounded-lg">
       {model && <ViewOrderScreen setModel={setModel} orderId={review._id} />}
       <div className="flex flex-row items-center ">
         <img

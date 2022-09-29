@@ -27,7 +27,7 @@ workerRouter.get("/getWorkers/:workerId", async (req, res) => {
 });
 
 workerRouter.get("/getWorkers", async (req, res) => {
-  const worker = await workerModel.find({});
+  const worker = await workerModel.find({}).populate("user");
   res.send(worker);
 });
 

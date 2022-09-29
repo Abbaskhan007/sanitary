@@ -179,15 +179,28 @@ orderRouter.post("/getReviews", async (req, res) => {
 orderRouter.put("/updateOrder", async (req, res) => {
   const { orderId, status } = req.body;
   try {
-    const updatedOrder = await orderModel.findByIdAndUpdate(
-      orderId,
-      {
-        status,
-      },
-      { new: true }
-    );
-    console.log("Updated Order: ", updatedOrder);
-    res.status(200).json(updatedOrder);
+    if (status === "Delivered") {
+      const updatedOrder = await orderModel.findByIdAndUpdate(
+        orderId,
+        {
+          status,
+          deliveredAt: Date.now(),
+        },
+        { new: true }
+      );
+      console.log("Updated Order: ", updatedOrder);
+      res.status(200).json(updatedOrder);
+    } else {
+      const updatedOrder = await orderModel.findByIdAndUpdate(
+        orderId,
+        {
+          status,
+        },
+        { new: true }
+      );
+      console.log("Updated Order: ", updatedOrder);
+      res.status(200).json(updatedOrder);
+    }
   } catch (err) {
     res.status(400).json(err);
   }

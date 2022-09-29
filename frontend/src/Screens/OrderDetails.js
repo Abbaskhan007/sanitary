@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import OrderItem from "../Components/OrderItem";
 import ProductSummary from "../Components/productSummary";
 
+
 function OrderDetails({ shipping, cart, paymentMethod }) {
   const [amount, setAmount] = useState(0);
+  
   console.log("Amount", amount, paymentMethod);
 
   return (
@@ -13,7 +15,7 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
       <CheckoutSteps step={4} />
       <div className="grid md:grid-cols-3 gap-10 ">
         <div className="md:col-span-2">
-          <div className="p-4 border-2 bg-violet-100 border-gray-200 mb-5">
+          <div className="p-4 border-2 rounded-lg bg-violet-100 border-gray-200 mb-5">
             <p className="text-lg font-bold mb-2">Shipping</p>
             <div>
               <span className="text-md font-bold">Name: </span>
@@ -24,14 +26,14 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
               <span className="text-md font-medium">{shipping.address}</span>
             </div>
           </div>
-          <div className="p-4 border-2 bg-violet-100 border-gray-200 mb-5">
+          <div className="p-4 border-2 rounded-lg bg-violet-100 border-gray-200 mb-5">
             <p className="text-lg font-bold mb-2">Payment</p>
             <div>
               <span className="text-md font-bold">Method: </span>
               <span className="text-md font-medium">{paymentMethod}</span>
             </div>
           </div>
-          <div className="p-4 border-2 bg-violet-100 border-gray-200 mb-5">
+          <div className="p-4 border-2 rounded-lg bg-violet-100 border-gray-200 mb-5">
             <p className="text-lg font-bold mb-2">Order Items</p>
             <div>
               {cart.map((item, index) => (
@@ -55,7 +57,7 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
 }
 
 const mapStateToProps = state => {
-  console.log(")_", state.cart);
+  console.log(")_--------", state.cart);
   return {
     shipping: state.cart.shipping,
     cart: state.cart.cart,

@@ -2,14 +2,11 @@ import React from "react";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 
 import {
-  IoPersonOutline,
-  IoSettingsOutline,
-  IoChatboxOutline,
   IoHomeOutline,
   IoStorefrontOutline,
 } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
-import { AiOutlineLogout, AiOutlineShopping } from "react-icons/ai";
+import { AiOutlineShopping } from "react-icons/ai";
 import SellerHome from "./SellerHome";
 import SellerProducts from "./SellerProducts";
 import SellerStores from "./SellerStores";
@@ -19,11 +16,13 @@ import EditProduct from "./EditProduct";
 import UploadProduct from "./UploadProduct";
 import StoreDetail from "./StoreDetail";
 import SellerOrders from "./SellerOrders";
+import SellerSideBar from "../Components/SellerSideBar";
 
 export default function SellerDashboard() {
   return (
     <div className="flex min-h-[calc(100vh-120px)] relative  bg-gray-50">
-      <div className="flex flex-col w-[250px] fixed h-full  border-r-2 border-gray-100  py-8">
+      <SellerSideBar/>
+      <div className="sm:flex hidden flex-col sm:w-[250px] fixed h-full  border-r-2 border-gray-100  py-8">
         <h3 className="text-xl font-semibold my-4 text-center">
           Seller Dashboard
         </h3>
@@ -88,7 +87,7 @@ export default function SellerDashboard() {
           <p>My Orders</p>
         </NavLink>
       </div>
-      <div className="flex-1 ml-[250px]">
+      <div className="flex-1 ml-[54px] sm:ml-[250px]">
         <Routes>
           <Route path="/home" element={<SellerHome />} />
           <Route path="/products" element={<SellerProducts />} />

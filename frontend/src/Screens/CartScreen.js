@@ -20,7 +20,7 @@ function CartScreen({ cart }) {
     );
   }
   return (
-    <div className="mt-12 flex md:space-x-12 flex-col px-12 md:flex-row sm:flex-col">
+    <div className="mt-12 flex md:space-x-12 flex-col sm:px-12 px-4 md:flex-row sm:flex-col">
       <div style={{ flex: 2 }}>
         {cart.map(item => (
           <CartItem item={item} />
@@ -31,6 +31,7 @@ function CartScreen({ cart }) {
           buttonText="Place Order"
           cartData={cart}
           path="/shipping"
+          cart={true}
         />
       </div>
     </div>

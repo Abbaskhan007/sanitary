@@ -4,6 +4,7 @@ import Axios from "axios";
 import ViewOrderScreen from "./ViewOrderScreen";
 import { IoCreateOutline } from "react-icons/io5";
 import Menu from "../Components/Menu";
+import moment from "moment";
 function SellerOrders({ seller }) {
   const [orders, setOrders] = useState([]);
   const [orderId, setOrderId] = useState("");
@@ -41,6 +42,7 @@ function SellerOrders({ seller }) {
     setSelectedMenu(status);
     setShowMenu(false);
     console.log("Order Data", data);
+    fetchOrders();
   };
 
   useEffect(() => {
@@ -124,17 +126,24 @@ function SellerOrders({ seller }) {
                   {order.customerId.name}
                 </td>
                 <td class="text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  <img className="rounded-md" src={order.productId.images[0]} />
+                  <img
+                    className="rounded-md"
+                    src={order.productId.images[0].url}
+                  />
                 </td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {order.paymentMethod === "bank" ? "Rs. " : "Eth: "}
                   {order.amount}
                 </td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  {order.createdAt}
+                  {moment(order.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                 </td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  {order.deliveredAt ?? "Not Delivered"}
+                  {order.deliveredAt
+                    ? moment(order.deliveredAt).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )
+                    : "Not Delivered"}
                 </td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <p

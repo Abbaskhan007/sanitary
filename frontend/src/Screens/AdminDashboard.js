@@ -7,6 +7,7 @@ import {
   IoConstructOutline,
 } from "react-icons/io5";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import AdminSideBar from "../Components/AdminSideBar";
 import Login from "./Login";
 import SellerRequests from "./SellerRequests";
 import UserOrdersScreen from "./UserOrdersScreen";
@@ -16,8 +17,9 @@ export default function AdminDashboard() {
   const [requestOpen, setRequestOpen] = useState(true);
   console.log("Request Open", requestOpen);
   return (
-    <div className="flex  z-10">
-      <div className="border-r-2 border-gray-100 w-[250px]  pt-24 fixed top-0 bottom-0  min-h-[calc(100vh-120px)] overflow-y-scroll">
+    <div className="flex overflow-x-hidden ">
+      <AdminSideBar />
+      <div className="border-r-2 sm:block hidden border-gray-100 w-[250px]  pt-24 fixed top-0 bottom-0  min-h-[calc(100vh-120px)] overflow-y-scroll">
         <h1 className="text-xl font-medium text-center mb-4">Dashboard</h1>
         <div className="text-gray-400 text-medium my-3 flex items-center space-x-3 px-8 "></div>
         <div className="flex items-center justify-between my-3 px-8 text-gray-400 ">
@@ -77,7 +79,7 @@ export default function AdminDashboard() {
           <p>My Orders</p>
         </NavLink>
       </div>
-      <div className="ml-[250px] p-6 w-full">
+      <div className="sm:ml-[250px] ml-[52px] p-4 ">
         <Routes>
           <Route path="workerRequests" element={<WorkerRequests />} />
           <Route path="sellerRequests" element={<SellerRequests />} />

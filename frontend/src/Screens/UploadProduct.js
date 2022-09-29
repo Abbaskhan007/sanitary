@@ -124,8 +124,8 @@ function UploadProduct({ seller }) {
 
   return (
     <div className="min-h-[calc(100vh-150px)] ">
-      <div className="px-12 flex items-center justify-center">
-        <div className="flex  justify-center flex-col w-[500px] py-8">
+      <div className="sm:px-12 px-4 flex items-center justify-center">
+        <div className="flex  justify-center flex-col sm:w-[500px] py-8">
           <h1 className="text-3xl font-medium mb-8 text-center">Add Product</h1>
           {error && <ErrorBox variant="fail" message={error} />}
           <ToastContainer />
@@ -200,7 +200,7 @@ function UploadProduct({ seller }) {
                 No Images Selected
               </h3>
             )}
-            <div className="grid grid-cols-3 gap-8 mt-6">
+            <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4 mt-6">
               {images?.map(image => (
                 <div className="relative group hover:bg-black hover:rounded-md">
                   <img
@@ -210,7 +210,7 @@ function UploadProduct({ seller }) {
                   <IoCloseOutline
                     onClick={() => onDelete(image)}
                     size={24}
-                    className="absolute top-1 right-1 cursor-pointer hidden group-hover:block bg-white opacity-80 rounded-full p-1"
+                    className="absolute top-1 right-1 cursor-pointer sm:hidden group-hover:block bg-white opacity-80 rounded-full p-1 border border-gray-400"
                   />
                 </div>
               ))}

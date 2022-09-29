@@ -31,7 +31,7 @@ function ProductCard({ product, seller, fetchProducts }) {
   return (
     <div
       onClick={() => navigate(`/products/${product._id}`)}
-      className={`border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out-300 duration: 300 overflow-hidden flex flex-col ${
+      className={`border-2 border-gray-200 shadow-lg rounded-lg cursor-pointer transition hover:scale-105 ease-in-out delay-100 duration-300 overflow-hidden flex flex-col ${
         product.seller === seller && "group relative"
       }`}
     >

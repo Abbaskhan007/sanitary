@@ -9,17 +9,15 @@ const storeRouter = require("./Routers/storeRouter");
 const workerRouter = require("./Routers/workerRouter");
 const workerRequestRouter = require("./Routers/workerRequestRouter");
 const sellerRequestRouter = require("./Routers/sellerRequestRouter");
+const categoryRouter = require("./Routers/categoryRouter");
+const workerCategoriesRouter = require("./Routers/workerCategoriesRouter");
+const shippingRouter = require("./Routers/shippingAddressRouter");
+const orderRouter = require("./Routers/orderRouter");
+
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 console.log("PROCESS--", process.env.STRIPE_SECRET_KEY);
-
-const {
-  RemoveBgResult,
-  RemoveBgError,
-  removeBackgroundFromImageUrl,
-} = require("remove.bg");
-const orderRouter = require("./Routers/orderRouter");
-const shippingRouter = require("./Routers/shippingAddressRouter");
 
 mongoose
   .connect("mongodb://localhost/sanitary", { useNewUrlParser: true })
@@ -65,27 +63,8 @@ app.post("/api/pay", async (req, res) => {
   }
 });
 
-// app.post("/removeBackground", (req, res) => {
-//   console.log("image", req.body);
-//   const url = "https://domain.tld/path/file.jpg";
-//   const outputFile = `${__dirname}/out/img-removed-from-file.png`;
-
-//   removeBackgroundFromImageUrl({
-//     url,
-//     apiKey: "fe1gkrUZNL2mGWwuodmDd94W",
-//     size: "regular",
-//     type: "person",
-//     outputFile,
-//   })
-//     .then(result => {
-//       console.log(`File saved to ${outputFile}`);
-//       const base64img = result.base64img;
-//     })
-//     .catch(errors => {
-//       console.log(JSON.stringify(errors));
-//     });
-// });
-
+app.use("/api/categories", categoryRouter);
+app.use("/api/workerCategories", workerCategoriesRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", cartRouter);

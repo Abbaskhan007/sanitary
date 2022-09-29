@@ -88,10 +88,10 @@ function CreateStore({ seller }) {
   } else {
     return (
       <div className="min-h-[calc(100vh-150px)] ">
-        <div className="px-12 flex items-center justify-center">
-          <div className="flex  justify-center flex-col w-[500px] py-8">
+        <div className="sm:px-12 px-2 flex items-center justify-center">
+          <div className="flex justify-center flex-col w-[90%] sm:w-[500px] py-8">
             <ToastContainer />
-            <h1 className="text-3xl font-medium mb-8 text-center">
+            <h1 className="sm:text-3xl text-lg font-medium mb-8 text-center">
               Create Store
             </h1>
             {error && <ErrorBox variant="fail" message={error} />}

@@ -168,10 +168,10 @@ export default function EditProduct() {
   } else {
     return (
       <div className="min-h-[calc(100vh-150px)] ">
-        <div className="px-12 flex items-center justify-center">
-          <div className="flex  justify-center flex-col w-[500px] py-8">
+        <div className="sm:px-12 px-4 flex items-center justify-center">
+          <div className="flex  justify-center flex-col sm:w-[500px] py-8">
             <ToastContainer />
-            <h1 className="text-3xl font-medium mb-8 text-center">
+            <h1 className="sm:text-3xl text-lg font-medium sm:mb-8 mb-4 text-center">
               Edit Product
             </h1>
             <label className="text-sm font-semibold mb-1 ">Name</label>
@@ -241,11 +241,11 @@ export default function EditProduct() {
             </div>
             <div className="my-8">
               <h1 className="text-3xl mb-4">Product Images</h1>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
                 {images?.map(image => (
                   <div className="relative group hover:bg-black hover:rounded-md">
                     <img
-                      className="rounded-md shadow-md h-full group-hover:opacity-50 "
+                      className="rounded-md shadow-lg shadow-gray-300 border-gray-300 border  h-full group-hover:opacity-50 object-contain"
                       src={image.url? image.url : image}
                     />
                     <IoCloseOutline

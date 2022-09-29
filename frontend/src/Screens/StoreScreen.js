@@ -12,19 +12,15 @@ import {
   STORE_FETCH_SUCCESS,
 } from "../Redux/Constants";
 
-function StoreScreen({ fetchStoreData, store, filterStore }) {
+function StoreScreen({ fetchStoreData, store, filterStore, categoryTypes }) {
   const [category, setCategory] = useState([]);
   const [search, setSearch] = useState("");
 
-  const data = [
-    { value: "Urinals", label: "Urinals" },
-    { value: "Basins", label: "Basins" },
-    { value: "Showers", label: "Showers" },
-  ];
+
 
   const onSearch = value => {
     setSearch(value);
-    filterStore({ search: value, categories:category });
+    filterStore({ search: value, categories: category });
   };
 
   const onCategoryChange = e => {
@@ -44,25 +40,26 @@ function StoreScreen({ fetchStoreData, store, filterStore }) {
     return <ErrorBox variant="fail" message={store.error} />;
   else {
     return (
-      <div className="p-12">
-        <div className="flex items-center space-x-12 mb-12 ">
-          <div className="flex flex-1 items-center bg-white  p-2 px-3 rounded-md  border-2 border-gray-300 ">
+      <div className="sm:p-12 py-8 px-6">
+        <div className="flex sm:flex-row flex-col items-center sm:space-x-12 sm:space-y-0 space-y-6 mb-12 ">
+          <div className="flex flex-1 w-full items-center bg-white  p-[7px] px-3 rounded-md  border border-gray-300 ">
             <IoSearch className="text-gray-500 mr-2" size={22} />
             <input
-              className="border-0  outline-0 bg-transparent text-medium flex-1"
+              className="border-0   outline-0 bg-transparent text-medium flex-1"
               type="text"
-              placeholder="Search product"
+              placeholder="Search store"
               onChange={e => onSearch(e.target.value)}
             />
           </div>
           <Select
             name="categories"
-            options={data}
+            options={categoryTypes}
             className="basic-multi-select"
             classNamePrefix="select"
-            placeholder="Please Select the categories"
+            placeholder="Select categories"
             onChange={onCategoryChange}
             isMulti={true}
+            className="sm:w-fit w-full"
           />
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2   gap-8">
@@ -76,8 +73,12 @@ function StoreScreen({ fetchStoreData, store, filterStore }) {
 }
 
 const mapStateToProps = state => {
+  const categoryTypes = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     store: state.store,
+    categoryTypes,
   };
 };
 

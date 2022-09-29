@@ -62,8 +62,12 @@ storeRouter.delete("/deleteStore/:storeId", async (req, res) => {
       const storeData = await storeModel.findById(storeId);
       console.log("***************))", storeData);
       cartModel.updateMany(
-        { products: { $in: storeData.products } },
-        { $pull: { products: { product: { $in: storeData.products } } } },
+        { products: { $in: storeData && storeData.products } },
+        {
+          $pull: {
+            products: { product: { $in: storeData && storeData.products } },
+          },
+        },
         (err, data) => {
           console.log(err, "Data***********", data);
           if (err) {
