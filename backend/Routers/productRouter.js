@@ -157,11 +157,21 @@ router.post("/filteredProducts", (req, res) => {
 router.post("/imageSearch", async (req, res) => {
   const images = req.body;
   console.log("Public _id: ", images);
-  const products = await productModel.find({
-    "images.public_id": { $in: images },
-  });
-  console.log("Products", products);
-  res.json(products);
+  productModel.find(
+    {
+      "images.public_id": { $in: images },
+    },
+    (err, data) => {
+      if (err) throw err;
+      console.log(`Data of Image Search><><><>//: ${data}`);
+      res.status("200").send(data);
+    }
+  );
+  // const products = await productModel.find({
+  //   "images.publicid": { $in: ["produs"] },
+  // });
+  // console.log("Products", products);
+  // res.json(products);
 });
 
 module.exports = router;

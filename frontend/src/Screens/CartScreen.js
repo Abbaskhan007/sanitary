@@ -11,7 +11,7 @@ function CartScreen({ cart }) {
       <div className="flex flex-1 items-center justify-center flex-col h-full  mt-32">
         <img
           className="w-[300px] m-0 "
-          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1657900283/vector-shopping-cart-icon-paper-sticker-with-shadow-colored-shopping-symbol-isolated_118339-1774-removebg_s1coie.png"
+          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1664562800/sanitary-store/empty_cart_w1vwci.png"
         />
         <p className="text-2xl -mt-12 text-gray-500 font-semibold">
           No items present in the cart

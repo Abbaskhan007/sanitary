@@ -95,12 +95,12 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
           <p className="font-semibold text-md my-4">{`Rs. ${productData.price}`}</p>
           <div className="flex flex-row items-center">
             <RatingStars rating={productData.rating} />
-            <p className="ml-2 text-gray-600">({productData.numRating})</p>
+            <p className="ml-2 text-gray-600">({productData.ratings.length})</p>
           </div>
           <div className="flex my-4 items-center">
             <img
               className="h-10 w-10 rounded-full border border-gray-300 p-1 mr-2"
-              src={productData?.images[0].url}
+              src={productData?.store.image}
             />
             <p className="text-medium font-semibold">
               {productData?.store?.name}
@@ -154,13 +154,11 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
 
         {productData?.reviews?.map(review => (
           <ReviewBox
-            review={
-              (review = {
-                ...review,
-                customerId: review.user,
-                review: review.message,
-              })
-            }
+            review={{
+              ...review,
+              customerId: review.user,
+              review: review.message,
+            }}
           />
         ))}
       </div>

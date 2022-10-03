@@ -18,7 +18,13 @@ import { IoSearch } from "react-icons/io5";
 import { FiFilter } from "react-icons/fi";
 import ImageSearch from "./ImageSearch";
 
-function HomeScreen({ fetchProducts, productList, searchHandler, getCategories, getWorkerCategories }) {
+function HomeScreen({
+  fetchProducts,
+  productList,
+  searchHandler,
+  getCategories,
+  getWorkerCategories,
+}) {
   const [showFilter, setShowFilter] = useState(false);
   const [keyword, setKeyword] = useState("");
 
@@ -38,7 +44,7 @@ function HomeScreen({ fetchProducts, productList, searchHandler, getCategories, 
   ) : productList.error ? (
     <ErrorBox />
   ) : (
-    <div className="p-8 px-6 sm:px-12">
+    <div className="p-8 px-6 sm:px-12 min-h-[calc(100vh-100px)] ">
       <div className="flex  items-center  lg:space-x-12 md:space-x-8 space-x-4 ">
         <div className="flex flex-1 items-center bg-white  p-2 px-3 rounded-md  border-2 border-gray-300 ">
           <IoSearch className="text-gray-500 mr-2" size={22} />
@@ -70,11 +76,17 @@ function HomeScreen({ fetchProducts, productList, searchHandler, getCategories, 
         showFilter={showFilter}
         setShowFilter={setShowFilter}
       />
-      <div className="grid  md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 space-y-6 sm:space-y-0 sm:gap-8  bg-[#ffffff]">
-        {productList.products.map(product => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </div>
+      {productList.products.length > 0 ? (
+        <div className="grid  md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 space-y-6 sm:space-y-0 sm:gap-8  bg-[#ffffff]">
+          {productList.products.map(product => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex -mt-12 h-full items-center justify-center">
+          <p className="text-red-400 text-xl font-semibold">No Products Present</p>
+        </div>
+      )}
     </div>
   );
 }

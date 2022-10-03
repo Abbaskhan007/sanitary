@@ -6,7 +6,13 @@ import { IoCameraOutline, IoCloseOutline } from "react-icons/io5";
 import Axios from "axios";
 import Loading from "./Loading";
 
-function WorkerForm({ showModel, openModel, closeModel, user }) {
+function WorkerForm({
+  showModel,
+  openModel,
+  closeModel,
+  user,
+  workerCategories,
+}) {
   const imageRef = useRef(null);
   const [images, setImages] = useState([]);
   const [price, setPrice] = useState(0);
@@ -15,12 +21,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cloudinaryFormatImages, setCloudinaryFormatImages] = useState([]);
-  const data = [
-    { value: "Plumber", label: "Plumber" },
-    { value: "Electrician", label: "Electrician" },
-    { value: "Decorator", label: "Decorator" },
-    { value: "Doctor", label: "Doctor" },
-  ];
+
 
   const onImageChange = e => {
     console.log("()", e.target.files[0]);
@@ -53,6 +54,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
         const imageData = new FormData();
         imageData.append("file", image);
         imageData.append("upload_preset", "sanitary");
+        imageData.append("folder", "workers");
         const response = await Axios.post(
           "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
           imageData
@@ -123,7 +125,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
                     <Select
                       isMulti
                       name="categories"
-                      options={data}
+                      options={workerCategories}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       className="bg-red-200 mt-1"
@@ -224,9 +226,13 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
 }
 
 const mapStateToProps = state => {
+  const workerCategories = state.categories.workerCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     showModel: state.model.modelOpen,
     user: state.user.user,
+    workerCategories,
   };
 };
 

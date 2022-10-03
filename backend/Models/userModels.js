@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema(
     },
     profileImage: {
       type: String,
+      default:
+        "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg",
     },
     phoneNumber: {
       type: Number,

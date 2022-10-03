@@ -54,15 +54,19 @@ function StoreCard({ store, seller, fetchStoreData }) {
       <div className="p-2">
         <p className="text-lg font-medium mb-1">{store.name}</p>
         <p className="text-sm font-medium">
-          Category: {store.category[0]}{" "}
+          Categories:{" "}
+          <span className="border border-gray-300 p-1 px-3 rounded-md font-medium text-gray-500 ml-2">
+            {store.category[0]}
+          </span>{" "}
           {store.category.length > 1 && (
             <span className="bg-gray-200 text-gray-500 py-2 px-3 rounded-md text-xs ml-2">
               {store.category.length - 1} more
             </span>
           )}
         </p>
-        <div className=" py-2">
+        <div className="flex space-x-2 py-2">
           <RatingStars rating={store.rating} />
+          <p className="text-gray-400 text-sm">({store.ratings.length})</p>
         </div>
       </div>
     </div>

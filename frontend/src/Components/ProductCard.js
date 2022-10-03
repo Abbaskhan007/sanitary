@@ -28,6 +28,8 @@ function ProductCard({ product, seller, fetchProducts }) {
     }
   };
 
+  console.log("_______________________", product);
+
   return (
     <div
       onClick={() => navigate(`/products/${product._id}`)}
@@ -53,13 +55,19 @@ function ProductCard({ product, seller, fetchProducts }) {
           </div>
         </div>
       )}
-      <img className="w-full flex-1 object-cover max-h-[250px]" src={product.images[0].url} />
+      <img
+        className="w-full flex-1 object-cover max-h-[250px]"
+        src={product.images[0].url}
+      />
       <div className="p-2 px-4">
         <p className="text-lg font-semibold my-1">{product.name}</p>
         <p className="text-md font-medium">Rs. {product.price}</p>
         <div className="flex items-center space-x-2">
-          <RatingStars numRating={product.numRating} rating={product.rating} />
-          <p className="text-gray-400 text-sm">({product.numRating})</p>
+          <RatingStars
+            numRating={product.reviews.length}
+            rating={product.rating}
+          />
+          <p className="text-gray-400 text-sm">({product.ratings.length})</p>
         </div>
       </div>
     </div>

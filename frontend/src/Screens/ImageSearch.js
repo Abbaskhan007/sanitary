@@ -3,25 +3,30 @@ import Axios from "axios";
 import { GrCamera } from "react-icons/gr";
 import { connect } from "react-redux";
 import { PRODUCT_SEARCH } from "../Redux/Constants";
+import mime from "mime";
 
-function ImageSearch({fetchProducts}) {
+function ImageSearch({ fetchProducts }) {
   const imageRef = useRef(null);
 
   const onChange = async event => {
     try {
       console.log("*****", event.target.files[0]);
       const formData = new FormData();
+
       formData.append("file", event.target.files[0]);
       const { data } = await Axios.post(
-        "http://127.0.0.1:4000/flaskSearchImage",
+        "http://127.0.0.1:4000/webFlaskSearchImage",
         formData
       );
       console.log("Data---", data);
       const public_ids = Object.values(data).map(
-        item => item.split("/")[1].split(".")[0]
+        item => `products/${item.split("/")[1].split(".")[0]}`
       );
       console.log("Public Ids", public_ids);
-      const productData = await Axios.post("/api/products/imageSearch",public_ids);
+      const productData = await Axios.post(
+        "/api/products/imageSearch",
+        public_ids
+      );
 
       console.log("Product Data after image search: ", productData);
       fetchProducts(productData.data);

@@ -31,6 +31,8 @@ export const WORKER_FETCH_FAILURE = "worker_fetch_failure";
 export const SAVE_SHIPPING_DETAILS = "save_shipping_details";
 export const SAVE_PAYMENT_METHOD = "save_payment_method";
 
+export const SELECT_SHIPPING_ADDRESS = "select_shipping_address";
+
 export const MODEL_OPEN = "model_open";
 export const MODEL_CLOSE = "model_close";
 export const DELETE_ACCOUNT = "delete_account";

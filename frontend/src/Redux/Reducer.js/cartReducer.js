@@ -6,6 +6,7 @@ import {
   REMOVE_FROM_CART,
   SAVE_PAYMENT_METHOD,
   SAVE_SHIPPING_DETAILS,
+  SELECT_SHIPPING_ADDRESS,
   UPDATE_CART,
 } from "../Constants";
 
@@ -32,6 +33,8 @@ export const cartReducer = (state = initialState, action) => {
     case EMPTY_CART:
       localStorage.removeItem("cart");
       return { ...state, cart: [] };
+
+
     case ADD_TO_CART_LOCAL:
       const exist = state.cart.find(
         item => item.product._id === action.payload.product._id

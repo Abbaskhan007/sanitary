@@ -21,9 +21,10 @@ function OrderDetails({ shipping, cart, paymentMethod }) {
               <span className="text-md font-bold">Name: </span>
               <span className="text-md font-medium">{shipping.name}</span>
             </div>
-            <div>
+            <div className="my-1">
               <span className="text-md font-bold">Address: </span>
-              <span className="text-md font-medium">{shipping.address}</span>
+              <span className="text-md font-medium">{shipping.address}, {shipping.area}, {shipping.city},{" "}
+            {shipping.province}</span>
             </div>
           </div>
           <div className="p-4 border-2 rounded-lg bg-violet-100 border-gray-200 mb-5">

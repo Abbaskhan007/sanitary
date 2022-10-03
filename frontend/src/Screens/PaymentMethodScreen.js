@@ -29,7 +29,7 @@ function PaymentMethodScreen({ user, savePaymentMethod }) {
         <div className="mb-2 self-center">
           <label className="font-semibold ">Bank Transfer</label>
           <img
-            src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1660668034/Screen_Shot_2022-08-16_at_8.33.09_PM_qfcrpp.png"
+            src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1660668034/sanitary-store/Screen_Shot_2022-08-16_at_8.33.09_PM_qfcrpp.png"
             className={`sm:w-[350px] h-[200px] cursor-pointer rounded-md shadow-md mb-8 mt-2 ${
               paymentMethod === "bank" &&
               "scale-110 ease-in-out delay-100 transition duration-500 mt-4" 

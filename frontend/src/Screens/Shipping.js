@@ -4,13 +4,17 @@ import { connect } from "react-redux";
 import { SAVE_SHIPPING_DETAILS } from "../Redux/Constants";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorBox from "../Components/ErrorBox";
+import AddressBox from "../Components/AddressBox";
+import Axios from "axios";
 
 function ShippingScreen({ user, saveShipping }) {
+  const [shippingData, setShippingData] = useState([]);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [selectShippingAddress, setSelectShippingAddress] = useState({});
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
@@ -26,6 +30,15 @@ function ShippingScreen({ user, saveShipping }) {
   };
   console.log("User...", user);
 
+  const fetchAddresses = async () => {
+    const { data } = await Axios.get(`api/shippingAddress/${user._id}`);
+    setShippingData(data);
+  };
+
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
+
   useEffect(() => {
     if (!user.name) {
       navigate("/login");
@@ -39,49 +52,28 @@ function ShippingScreen({ user, saveShipping }) {
       <CheckoutSteps step={2} />
 
       <div className="flex items-center justify-center">
-        <div className="flex  justify-center flex-col w-[500px]">
+        <div className="flex  justify-center flex-col sm:w-[500px] w-[90%]">
           {error && <ErrorBox message="Fill all the values" variant="fail" />}
-          <p className="text-lg font-medium my-4">Shipping Address</p>
-          <label className="text-sm font-semibold mb-1">Full Name</label>
-          <input
-            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
-            placeholder="Enter Full Name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-          <label className="text-sm font-semibold mb-1">Address</label>
-          <input
-            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
-            placeholder="Enter Address"
-            value={address}
-            onChange={e => setAddress(e.target.value)}
-          />
-          <label className="text-sm font-semibold mb-1">City</label>
-          <input
-            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
-            placeholder="Enter City Name"
-            value={city}
-            onChange={e => setCity(e.target.value)}
-          />
-          <label className="text-sm font-semibold mb-1">Postal Code</label>
-          <input
-            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
-            placeholder="Enter Postal Code"
-            value={postalCode}
-            onChange={e => setPostalCode(e.target.value)}
-          />
-          <label className="text-sm font-semibold mb-1">Country</label>
-          <input
-            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
-            placeholder="Enter Country Name"
-            value={country}
-            onChange={e => setCountry(e.target.value)}
-          />
           <div
-            onClick={onSubmitHandler}
-            className="bg-violet-500 text-lg font-semibold text-center p-2 shadow-md text-white rounded-md my-2 cursor-pointer"
+            onClick={() =>
+              navigate("/shippingAddressFormScreen", {
+                state: { action: "new" },
+              })
+            }
+            className="bg-violet-200 border p-[6px] rounded-md mb-8 border-violet-600 cursor-pointer"
           >
-            Submit
+            <p className="text-violet-600 text-center text-medium font-medium">
+              Add Shipping Address
+            </p>
+          </div>
+          <div>
+            {shippingData.map(item => (
+              <AddressBox
+                address={item}
+                item={item}
+                selectShippingAddress={setSelectShippingAddress}
+              />
+            ))}
           </div>
         </div>
       </div>

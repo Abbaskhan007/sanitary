@@ -48,8 +48,8 @@ export default function WorkerRequests() {
   const onReject = async requestId => {
     console.log("Request Id", requestId);
     try {
-      const response = await Axios.delete(
-        `/api/sellerRequests/rejectRequest/${requestId}`
+      const response = await Axios.put(
+        `/api/workerRequests/rejectRequest/`,{requestId}
       );
       fetchRequests();
     } catch (err) {

@@ -27,10 +27,9 @@ function StripePayment({
       });
       const orderData = {
         customerId: userId,
-        //shippingAddress: shippingAddress._id,
-        shippingAddress: "62fa6b86639e00a70eed3910",
+        shippingAddress: shippingAddress,
         paymentMethod,
-        amount: 400,
+        amount,
       };
       const promise = products.map(async product => {
         const { data } = await Axios.post(`/api/orders/create`, {
@@ -129,7 +128,7 @@ const mapStateToProps = state => {
   return {
     seller: state.seller,
     userId: state.user.user._id,
-    shippingAddress: state.cart.shipping,
+    shippingAddress: state.cart.shipping._id,
     paymentMethod: state.cart.payment,
     products,
   };

@@ -17,7 +17,7 @@ export default function AdminDashboard() {
   const [requestOpen, setRequestOpen] = useState(true);
   console.log("Request Open", requestOpen);
   return (
-    <div className="flex overflow-x-hidden ">
+    <div className="flex  overflow-x-hidden ">
       <AdminSideBar />
       <div className="border-r-2 sm:block hidden border-gray-100 w-[250px]  pt-24 fixed top-0 bottom-0  min-h-[calc(100vh-120px)] overflow-y-scroll">
         <h1 className="text-xl font-medium text-center mb-4">Dashboard</h1>
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
           <p>My Orders</p>
         </NavLink>
       </div>
-      <div className="sm:ml-[250px] ml-[52px] p-4 ">
+      <div className="sm:ml-[250px] flex-1 ml-[52px] p-4 ">
         <Routes>
           <Route path="workerRequests" element={<WorkerRequests />} />
           <Route path="sellerRequests" element={<SellerRequests />} />

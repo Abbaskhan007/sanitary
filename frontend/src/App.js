@@ -26,9 +26,9 @@ import BlockchainPaymentScreen from "./Components/BlockchainPaymentScreen";
 import ViewOrderScreen from "./Screens/ViewOrderScreen";
 import ImageSearch from "./Screens/ImageSearch";
 import Sidebar from "./Components/Sidebar";
+import ShippingAddressFormScreen from "./Screens/ShippingAddressFormScreen";
 
 function App() {
-  
   const [show, setShow] = useState(false);
   return (
     <div className={`relative min-h-[100vh] py-12`}>
@@ -72,6 +72,10 @@ function App() {
                 <AdminDashboard />
               </ProtectRoute>
             }
+          />
+          <Route
+            path="shippingAddressFormScreen"
+            element={<ShippingAddressFormScreen />}
           />
           <Route
             path="workerDashboard/*"

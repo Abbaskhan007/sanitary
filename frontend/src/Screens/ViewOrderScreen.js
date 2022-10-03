@@ -113,7 +113,8 @@ export default function ViewOrderScreen({ setModel, orderId }) {
                 {orderData?.amount}
               </p>
             </div>
-            {!orderData?.rating ? (
+            {console.log("==========", orderData)}
+            {orderData?.rating ? (
               <div>
                 <p className="font-medium">My Rating: </p>
                 {/* <StarRa rating={orderData?.rating} /> */}

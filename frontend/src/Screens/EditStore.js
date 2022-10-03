@@ -7,8 +7,9 @@ import ErrorBox from "../Components/ErrorBox";
 import { MdModeEditOutline } from "react-icons/md";
 import { BsUpload } from "react-icons/bs";
 import { connect } from "react-redux";
+import { store } from "../Redux/rootReducer";
 
-function EditStore({ products }) {
+function EditStore({ products, productCategories }) {
   const imageRef = useRef(null);
   const [storeData, setStoreData] = useState({});
   const { storeId } = useParams();
@@ -40,10 +41,10 @@ function EditStore({ products }) {
       setName(response.data.name);
       setImage(response.data.image);
       setDescription(response.data.description);
-      setCategory({
-        label: response.data.category,
-        value: response.data.category,
+      const storeCtg = response.data.category.map(ctg => {
+        return { label: ctg, value: ctg };
       });
+      setCategory(storeCtg);
     } catch (err) {
       alert(err.message);
     }
@@ -63,6 +64,7 @@ function EditStore({ products }) {
         const form = new FormData();
         form.append("file", cloudinaryImage);
         form.append("upload_preset", "sanitary");
+        form.append("folder", "stores");
         const cloudinayResponse = await Axios.post(
           "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
           form
@@ -95,7 +97,9 @@ function EditStore({ products }) {
     <div className="min-h-[calc(100vh-150px)] ">
       <div className="sm:px-12 px-4 flex items-center justify-center">
         <div className="flex  justify-center flex-col sm:w-[500px] py-8">
-          <h1 className="sm:text-3xl text-lg font-medium mb-8 text-center">Edit Store</h1>
+          <h1 className="sm:text-3xl text-lg font-medium mb-8 text-center">
+            Edit Store
+          </h1>
           {error && <ErrorBox variant="fail" message={error} />}
           <div
             onClick={() => imageRef.current.click()}
@@ -135,8 +139,9 @@ function EditStore({ products }) {
           />
           <label className="text-sm font-semibold mb-1 ">Category</label>
           <Select
+            isMulti
             name="categories"
-            options={data}
+            options={productCategories}
             className="basic-multi-select"
             classNamePrefix="select"
             className="bg-red-200 mt-1"
@@ -170,8 +175,12 @@ function EditStore({ products }) {
 }
 
 const mapStateToProps = state => {
+  const productCategories = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     products: state.productList.products,
+    productCategories,
   };
 };
 

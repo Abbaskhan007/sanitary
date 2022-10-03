@@ -16,8 +16,6 @@ function StoreScreen({ fetchStoreData, store, filterStore, categoryTypes }) {
   const [category, setCategory] = useState([]);
   const [search, setSearch] = useState("");
 
-
-
   const onSearch = value => {
     setSearch(value);
     filterStore({ search: value, categories: category });
@@ -40,7 +38,7 @@ function StoreScreen({ fetchStoreData, store, filterStore, categoryTypes }) {
     return <ErrorBox variant="fail" message={store.error} />;
   else {
     return (
-      <div className="sm:p-12 py-8 px-6">
+      <div className="sm:p-12 py-8 px-6  min-h-[calc(100vh-100px)]">
         <div className="flex sm:flex-row flex-col items-center sm:space-x-12 sm:space-y-0 space-y-6 mb-12 ">
           <div className="flex flex-1 w-full items-center bg-white  p-[7px] px-3 rounded-md  border border-gray-300 ">
             <IoSearch className="text-gray-500 mr-2" size={22} />
@@ -62,11 +60,19 @@ function StoreScreen({ fetchStoreData, store, filterStore, categoryTypes }) {
             className="sm:w-fit w-full"
           />
         </div>
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2   gap-8">
-          {store.data?.map(item => (
-            <StoreCard store={item} />
-          ))}
-        </div>
+        {store?.data?.length > 0 ? (
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2   gap-8">
+            {store.data?.map(item => (
+              <StoreCard store={item} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex -mt-12 h-full items-center justify-center">
+            <p className="text-red-400 text-xl font-semibold">
+              No Store Present
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -110,3 +116,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoreScreen);
+

@@ -2,6 +2,7 @@ const e = require("express");
 const express = require("express");
 const orderModel = require("../Models/orderModel");
 const productModel = require("../Models/productModel");
+const storeModel = require("../Models/storeModel");
 const orderRouter = express.Router();
 
 orderRouter.post("/create", async (req, res) => {
@@ -59,13 +60,15 @@ orderRouter.get("/myOrders/:userId", async (req, res) => {
       const orders = await orderModel
         .find({ customerId: userId })
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     } else {
       const orders = await orderModel
         .find({ status: status, customerId: userId })
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     }
   } catch (error) {
@@ -83,13 +86,15 @@ orderRouter.get("/getOrders/:status", async (req, res) => {
       const orders = await orderModel
         .find({})
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     } else {
       const orders = await orderModel
         .find({ status: status })
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     }
   } catch (error) {
@@ -108,13 +113,15 @@ orderRouter.get("/sellerOrders/:sellerId", async (req, res) => {
       const orders = await orderModel
         .find({ sellerId })
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     } else {
       const orders = await orderModel
         .find({ status: status, sellerId })
         .populate("customerId")
-        .populate("productId");
+        .populate("productId")
+        .populate("storeId");
       res.status(200).json(orders);
     }
   } catch (error) {
@@ -131,6 +138,7 @@ orderRouter.put("/rate", (req, res) => {
     .findByIdAndUpdate(orderId, body, { new: true })
     .populate("customerId")
     .populate("productId")
+    .populate("storeId")
     .populate("shippingAddress")
     .populate("productId.store")
     .populate("productId.seller")
@@ -149,12 +157,45 @@ orderRouter.put("/rate", (req, res) => {
             rating: newRating,
             $push: {
               ratings: body.rating,
-              reviews: { message: body.review, user: data.customerId._id },
+              reviews: {
+                message: body.review,
+                user: data.customerId._id,
+                rating: body.rating,
+              },
             },
           },
 
           { new: true }
         );
+
+        console.log(
+          "------------------ checking",
+          data.storeId.rating,
+          ",",
+          data.storeId.ratings?.length,
+          ",",
+          body.rating,
+          ",",
+          data.storeId
+        );
+
+        const storeNumRating =
+          (parseInt(data.storeId.rating) *
+            parseInt(data.storeId.ratings.length) +
+            parseInt(body.rating)) /
+          (parseInt(data.storeId.ratings.length) + 1);
+        console.log("Num Rating-----", storeNumRating);
+
+        const updateStore = await storeModel.findByIdAndUpdate(
+          data.storeId._id,
+          {
+            rating: storeNumRating.toFixed(1),
+            $push: {
+              ratings: body.rating,
+            },
+          }
+        );
+
         console.log("New Products", updateProduct);
         return res.status(200).json(data);
       }
@@ -168,7 +209,9 @@ orderRouter.post("/getReviews", async (req, res) => {
     const reviews = await orderModel
       .find(body)
       .populate("productId")
-      .populate("customerId");
+      .populate("customerId")
+      .populate("storeId");
+
     console.log("Reviews", reviews);
     res.status(200).json(reviews);
   } catch (err) {

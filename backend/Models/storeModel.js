@@ -26,6 +26,7 @@ const storeSchema = new mongoose.Schema(
         ref: "Product",
       },
     ],
+    ratings: [{ type: Number, default: [] }],
     rating: {
       type: Number,
       default: 0,

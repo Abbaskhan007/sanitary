@@ -145,7 +145,7 @@ function BlockchainPaymentScreen({
 
         const orderData = {
           customerId: user,
-          shippingAddress: "62fa6b86639e00a70eed3910",
+          shippingAddress: shippingAddress,
           paymentMethod,
           amount: etheriumPrice,
           contractAddress: transactionHash.hash,
@@ -256,9 +256,11 @@ function BlockchainPaymentScreen({
   }
 
   return (
-    <div className="flex flex-1 items-center justify-center">
+    <div className="flex  items-center justify-center min-h-[calc(100vh-150px)]">
       {showModal && <Model />}
-      Sending Etherium
+
+      <p className="text-xl font-semibold text-center">Sending Etherium</p>
+      
     </div>
   );
 }
@@ -273,7 +275,7 @@ const mapStateToProps = state => {
   return {
     seller: state.seller,
     user: state.user.user._id,
-    shippingAddress: state.cart.shipping,
+    shippingAddress: state.cart.shipping._id,
     paymentMethod: state.cart.payment,
     products,
   };

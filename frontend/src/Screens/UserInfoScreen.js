@@ -36,6 +36,7 @@ function UserInfoScreen({ userData, updateProfile }) {
     const data = new FormData();
     data.append("file", e.target.files[0]);
     data.append("upload_preset", "sanitary");
+    data.append("folder", "users");
     const response = await Axios.post(
       "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
       data

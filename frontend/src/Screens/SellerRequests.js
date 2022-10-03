@@ -6,8 +6,9 @@ import {
   IoChevronUpOutline,
   IoCloseSharp,
 } from "react-icons/io5";
+import { connect } from "react-redux";
 
-export default function SellerRequests() {
+function SellerRequests() {
   const [requests, setRequests] = useState([]);
   const [show, setShow] = useState(false);
 
@@ -56,8 +57,8 @@ export default function SellerRequests() {
   console.log("Seller requests", requests);
   if (requests.length <= 0) {
     return (
-      <div className="flex items-center justify-center text-3xl font-medium  w-full h-[calc(100vh-160px)] text-center ">
-        No Requests Present
+      <div className="flex items-center justify-center w-[full]  h-[calc(100vh-160px)]">
+        <p className="text-3xl font-medium text-center">No Requests Present</p>
       </div>
     );
   } else {
@@ -72,11 +73,11 @@ export default function SellerRequests() {
               />
               <h4 className="text-xl ">{request.user?.name}</h4>
             </div>
-            <div className="flex items-center my-2">
-              <p className="text-medium font-medium">Categories: </p>
-              <div className="flex items-center ml-4 space-x-4 flex-wrap">
+            <div className="flex items-center mt-2">
+              <p className="text-medium font-medium mb-2">Categories: </p>
+              <div className="flex items-center ml-4  flex-wrap">
                 {request?.categories.map(category => (
-                  <p className="px-4 py-1 border cursor-pointer rounded-md border-gray-200">
+                  <p className="px-4 mr-3 mb-2 py-1 border cursor-pointer rounded-md border-gray-200">
                     {category}
                   </p>
                 ))}
@@ -129,3 +130,5 @@ export default function SellerRequests() {
     );
   }
 }
+
+export default SellerRequests;

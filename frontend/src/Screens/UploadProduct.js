@@ -8,12 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 
-function UploadProduct({ seller }) {
-  const data = [
-    { value: "Urinals", label: "Urinals" },
-    { value: "Basins", label: "Basins" },
-    { value: "Showers", label: "Showers" },
-  ];
+function UploadProduct({ seller, productCategories }) {
   const imageRef = useRef(null);
   const { storeId } = useParams();
   const navigate = useNavigate();
@@ -22,6 +17,7 @@ function UploadProduct({ seller }) {
 
   const [name, setName] = useState(null);
   const [description, setDescrption] = useState(null);
+  const [model, setModel] = useState(null);
   const [price, setPrice] = useState(0);
   const [inStock, setInStock] = useState(0);
   const [images, setImages] = useState([]);
@@ -58,16 +54,29 @@ function UploadProduct({ seller }) {
       !price ||
       !inStock ||
       !name ||
-      !shippingPrice
+      !shippingPrice ||
+      !model
     ) {
       setError("Please Enter All the Fields");
       alert("Please Enter all the fields");
     } else {
+      if (model.split(".")[model.split(".").length - 1] !== "glb") {
+        console.log(
+          "-=-===-=-=-=-=-",
+          model.split("."),
+          model.split(".")[model.split.length - 1]
+        );
+        setError("3D Model file should be in .glb format");
+        setLoading(false);
+        return;
+      }
       const uploadedImages = await Promise.all(
         images.map(async image => {
           const imageData = new FormData();
           imageData.append("file", image.file);
           imageData.append("upload_preset", "sanitary");
+          imageData.append("cloud_name", "dlxyvl6sb");
+          imageData.append("folder", "products");
           const response = await Axios.post(
             "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
             imageData
@@ -76,7 +85,7 @@ function UploadProduct({ seller }) {
         })
       );
       console.log("Uploaded Images", uploadedImages);
-      const categoriesValue = categories.map(category => category.value);
+
       const data = {
         name,
         images: uploadedImages,
@@ -84,9 +93,10 @@ function UploadProduct({ seller }) {
         price,
         inStock,
         shippingPrice,
-        category: categoriesValue,
+        category: categories.label,
         seller,
         store: storeId,
+        model,
       };
       try {
         const response = await Axios.post("/api/products/addProduct", data);
@@ -117,6 +127,8 @@ function UploadProduct({ seller }) {
     }
     setLoading(false);
   };
+
+  console.log("--------", categories);
 
   if (loading) {
     return <Loading />;
@@ -170,15 +182,21 @@ function UploadProduct({ seller }) {
             Product Category
           </label>
           <Select
-            isMulti
             name="categories"
-            options={data}
+            options={productCategories}
             className="basic-multi-select"
             classNamePrefix="select"
             className=" mt-1"
             placeholder="Please Select the categories"
             onChange={setCategories}
             value={categories}
+          />
+          <label className="text-sm font-semibold mb-1 mt-4">3D Model</label>
+          <input
+            placeholder="Enter 3D Model URL (.glb)"
+            value={model}
+            onChange={e => setModel(e.target.value)}
+            className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
           />
           <input
             onChange={onImageChange}
@@ -202,9 +220,9 @@ function UploadProduct({ seller }) {
             )}
             <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4 mt-6">
               {images?.map(image => (
-                <div className="relative group hover:bg-black hover:rounded-md">
+                <div className="relative group hover:bg-black hover:rounded-md border border-gray-50">
                   <img
-                    className="rounded-md shadow-md h-full group-hover:opacity-50 "
+                    className="rounded-md shadow-md h-full  group-hover:opacity-50"
                     src={image.url}
                   />
                   <IoCloseOutline
@@ -229,8 +247,12 @@ function UploadProduct({ seller }) {
 }
 
 const mapStateToProps = state => {
+  const productCategories = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     seller: state.seller._id,
+    productCategories,
   };
 };
 

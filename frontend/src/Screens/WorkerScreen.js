@@ -33,7 +33,7 @@ function WorkerScreen({ worker, fetchWorkers, filterWorkers }) {
   const onCategoryChange = e => {
     const newCategories = e.map(item => item.value);
     setCategories(newCategories);
-    const filterData = { ...value, categories:newCategories, city };
+    const filterData = { ...value, categories: newCategories, city };
     filterWorkers(filterData);
   };
 
@@ -57,7 +57,7 @@ function WorkerScreen({ worker, fetchWorkers, filterWorkers }) {
     <Loading />;
   } else {
     return (
-      <div className="p-8">
+      <div className="p-8 min-h-[calc(100vh-100px)]">
         <div className="flex space-x-8 mb-8">
           <Select
             styles={customStyles}
@@ -86,11 +86,19 @@ function WorkerScreen({ worker, fetchWorkers, filterWorkers }) {
           value={value}
           setValue={setValue}
         />
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:gap-8 ">
-          {worker?.data?.map(item => (
-            <WorkerCard worker={item} />
-          ))}
-        </div>
+        {worker.data.length > 0 ? (
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:gap-8 ">
+            {worker?.data?.map(item => (
+              <WorkerCard worker={item} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex -mt-12 h-full items-center justify-center">
+            <p className="text-red-400 text-xl font-semibold">
+              No Worker Present
+            </p>
+          </div>
+        )}
       </div>
     );
   }

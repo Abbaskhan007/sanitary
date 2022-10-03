@@ -10,7 +10,7 @@ import ErrorBox from "../Components/ErrorBox";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Components/Loading";
 
-function CreateStore({ seller }) {
+function CreateStore({ seller, productCategories }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
@@ -18,11 +18,9 @@ function CreateStore({ seller }) {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const data = [
-    { value: "Urinals", label: "Urinals" },
-    { value: "Basins", label: "Basins" },
-    { value: "Showers", label: "Showers" },
-  ];
+
+  console.log("Set categories", category);
+
   const cameraRef = useRef(null);
   const navigate = useNavigate();
 
@@ -40,14 +38,17 @@ function CreateStore({ seller }) {
       const form = new FormData();
       form.append("file", image);
       form.append("upload_preset", "sanitary");
+      form.append("folder", "stores");
       const cloudinayResponse = await Axios.post(
         "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
         form
       );
 
+      const storeCategories = category.map(ctg => ctg.label);
+
       const data = {
         name,
-        category: category.value,
+        category: storeCategories,
         image: cloudinayResponse.data.url,
         seller,
         description,
@@ -83,6 +84,8 @@ function CreateStore({ seller }) {
     }
     setLoading(false);
   };
+  console.log("-------",category, description)
+  
   if (loading) {
     return <Loading />;
   } else {
@@ -113,8 +116,9 @@ function CreateStore({ seller }) {
             />
             <label className="text-sm font-semibold mb-1">Store Category</label>
             <Select
+              isMulti
               name="categories"
-              options={data}
+              options={productCategories}
               className="basic-multi-select"
               classNamePrefix="select"
               className="bg-red-200 mt-1"
@@ -160,8 +164,12 @@ function CreateStore({ seller }) {
 }
 
 const mapStateToProps = state => {
+  const productCategories = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     seller: state.seller._id,
+    productCategories,
   };
 };
 

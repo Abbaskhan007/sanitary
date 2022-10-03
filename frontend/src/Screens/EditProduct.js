@@ -6,8 +6,9 @@ import { IoCameraOutline, IoCloseOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../Components/Loading";
+import { connect } from "react-redux";
 
-export default function EditProduct() {
+function EditProduct({ productCategories }) {
   const { productId } = useParams();
   console.log("Use PArams", productId);
   const imageRef = useRef(null);
@@ -22,13 +23,9 @@ export default function EditProduct() {
   const [categories, setCategories] = useState(null);
   const [cloudinaryImages, setCloudinaryImage] = useState([]);
   const [error, setError] = useState(null);
+  const [model, setModel] = useState(null);
   const [realImages, setRealImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const data = [
-    { value: "Urinals", label: "Urinals" },
-    { value: "Basins", label: "Basins" },
-    { value: "Showers", label: "Showers" },
-  ];
 
   const onImageChange = e => {
     console.log("()", e.target.files[0]);
@@ -56,9 +53,10 @@ export default function EditProduct() {
     setImages(product.data.images);
     setShippingPrice(product.data.shippingPrice);
     setRealImages(product.data.images);
+    setModel(product.data.model);
     setCategories({
-      label: productData.data?.category,
-      value: productData.data?.category,
+      label: product.data.category,
+      value: product.data.category,
     });
   };
 
@@ -94,7 +92,8 @@ export default function EditProduct() {
       !price ||
       !inStock ||
       !name ||
-      !shippingPrice
+      !shippingPrice ||
+      !model
     ) {
       alert("Please Fill All Input Fields");
       setError("Please Fill All Input Fields");
@@ -105,6 +104,7 @@ export default function EditProduct() {
           const imageData = new FormData();
           imageData.append("file", image.cloudinary);
           imageData.append("upload_preset", "sanitary");
+          data.append("folder", "products");
           const response = await Axios.post(
             "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
             imageData
@@ -128,6 +128,7 @@ export default function EditProduct() {
         inStock,
         shippingPrice,
         category: categories.value,
+        model,
       };
       try {
         const response = await Axios.put(
@@ -161,7 +162,7 @@ export default function EditProduct() {
     }
     setLoading(false);
   };
-
+  console.log("Model", productData.model);
   console.log("Real Images--------------------", realImages);
   if (loading) {
     return <Loading />;
@@ -213,12 +214,19 @@ export default function EditProduct() {
               onChange={e => setDescrption(e.target.value)}
               className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
             />
+            <label className="text-sm font-semibold mb-1 ">3D Model</label>
+            <input
+              placeholder="Enter 3D Model URL (.glb)"
+              value={model}
+              onChange={e => setModel(e.target.value)}
+              className="border-2 border-gray-200 p-1 px-2 rounded-md mb-4"
+            />
             <label className="text-sm font-semibold mb-1 ">
               Product Category
             </label>
             <Select
               name="categories"
-              options={data}
+              options={productCategories}
               className="basic-multi-select"
               classNamePrefix="select"
               className=" mt-1"
@@ -245,8 +253,8 @@ export default function EditProduct() {
                 {images?.map(image => (
                   <div className="relative group hover:bg-black hover:rounded-md">
                     <img
-                      className="rounded-md shadow-lg shadow-gray-300 border-gray-300 border  h-full group-hover:opacity-50 object-contain"
-                      src={image.url? image.url : image}
+                      className="rounded-md shadow-lg shadow-gray-300 border-gray-300 border  h-full group-hover:opacity-50 w-full"
+                      src={image.url ? image.url : image}
                     />
                     <IoCloseOutline
                       onClick={() => onDelete(image)}
@@ -269,3 +277,14 @@ export default function EditProduct() {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const productCategories = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
+  return {
+    productCategories,
+  };
+};
+
+export default connect(mapStateToProps, null)(EditProduct);
