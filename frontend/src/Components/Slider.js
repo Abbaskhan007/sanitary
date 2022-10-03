@@ -33,8 +33,8 @@ export default function Slider(props) {
           onClick={() => sliderHandler(-1)}
         />
         <img
-          className="transition ease-in-out-400 duration:400 object-contain "
-          src={images[mainImage]}
+          className="transition ease-in-out-400 duration:400 object-contain max-h-[500px] mx-auto"
+          src={images[mainImage].url || images[mainImage]}
         />
         <AiOutlineRight
           className="text-5xl absolute right-4  text-gray-400 font-thin cursor-pointer"
@@ -48,7 +48,7 @@ export default function Slider(props) {
             className={`w-12 h-12 border  border-gray-100 shadow-md cursor-pointer transition hover:scale-105 ease-in-out-400 duration: 400 rounded ${
               mainImage === index ? "scale-105 border-violet-500 p-1" : null
             }`}
-            src={image}
+            src={image.url || image}
           />
         ))}
       </div>

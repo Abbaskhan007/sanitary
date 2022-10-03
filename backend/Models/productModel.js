@@ -4,25 +4,45 @@ const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     images: [
       {
-        type: String,
-        require,
+        url: {
+          type: String,
+          required: true,
+        },
+        public_id: {
+          type: String,
+          required: true,
+        },
       },
     ],
+    category: { type: String, required: true },
+    model: {
+      type: String,
+      required: true,
+    },
+    seller: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sellers",
+      required: true,
+    },
+
     store: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Stores",
+      ref: "Store",
+      required: true,
     },
     rating: {
       type: Number,
+      default: 0,
     },
+    ratings: [{ type: Number, default: [] }],
     numRating: {
       type: Number,
       default: 0,
@@ -34,19 +54,20 @@ const productSchema = mongoose.Schema(
           ref: "user",
         },
         message: String,
+        rating: Number,
       },
     ],
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
     inStock: {
       type: Number,
-      require: true,
+      required: true,
     },
     shippingPrice: {
       type: Number,
-      default: 0,
+      required: true,
     },
   },
   { timeStamps: true }

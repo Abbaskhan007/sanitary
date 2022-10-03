@@ -4,13 +4,10 @@ import Select from "react-select";
 import { IoCloseOutline } from "react-icons/io5";
 import { connect } from "react-redux";
 
-function SellerForm({ user }) {
+function SellerForm({ user, productCategories }) {
+  console.log("Product categories----", productCategories);
   const [openModel, setOpenModel] = useState(false);
-  const data = [
-    { value: "Urinals", label: "Urinals" },
-    { value: "Basins", label: "Basins" },
-    { value: "Showers", label: "Showers" },
-  ];
+
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState("");
 
@@ -59,7 +56,7 @@ function SellerForm({ user }) {
               <Select
                 isMulti
                 name="categories"
-                options={data}
+                options={productCategories}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 className="bg-red-200 mt-1"
@@ -103,8 +100,12 @@ function SellerForm({ user }) {
 }
 
 const mapStateToProps = state => {
+  const productCategories = state.categories.productCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     user: state.user.user._id,
+    productCategories,
   };
 };
 

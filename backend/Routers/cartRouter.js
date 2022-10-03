@@ -20,7 +20,10 @@ router.get("/:userId", async (req, res) => {
 
 router.post("/addToCart", async (req, res) => {
   const cartData = req.body;
-  console.log("Req.body*******************************************************************", cartData);
+  console.log(
+    "Req.body*******************************************************************",
+    cartData
+  );
   const checkUser = await cartModel.findOne({ user: cartData.user }); //checking if the user cart is already created in the database or not
 
   // if the user's cart already exist then check if the product is present in the user cart or not
@@ -153,8 +156,21 @@ router.delete("/deleteProduct", async (req, res) => {
         path: "product",
       },
     });
-    res.send(updatedCart)
+  res.send(updatedCart);
   console.log("Updated Cart", updatedCart);
+});
+
+router.delete("/emptyCart/:userId", async (req, res) => {
+  try {
+    console.log("--------------------- Empty Cart");
+    const userId = req.params.userId;
+    const cartData = await cartModel.findOneAndDelete({ user: userId });
+    console.log("-------- 2", cartData);
+    res.status(200).json({ message: "Cart Empty" });
+  } catch (err) {
+    console.log("-------- 1", err);
+    res.status(400).json(err);
+  }
 });
 
 module.exports = router;

@@ -4,23 +4,21 @@ const storeSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
-    category: {
-      type: String,
-      require: true,
-    },
+    category: [{ type: String, required: true }],
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     image: {
       type: String,
-      require: true,
+      required: true,
     },
     seller: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Seller",
+      required: true,
     },
     products: [
       {
@@ -28,6 +26,7 @@ const storeSchema = new mongoose.Schema(
         ref: "Product",
       },
     ],
+    ratings: [{ type: Number, default: [] }],
     rating: {
       type: Number,
       default: 0,

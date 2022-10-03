@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 
 import {
   IoPersonOutline,
@@ -16,8 +16,10 @@ import UserReviewsScreen from "./UserReviewsScreen";
 import { EMPTY_CART, LOGOUT } from "../Redux/Constants";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
+import ProfileSidebar from "../Components/ProfileSidebar";
 
-function ProfileScreen({ logout }) {
+function ProfileScreen({ user, logout }) {
+  console.log("User", user);
   const navigate = useNavigate();
 
   const onLogout = () => {
@@ -28,8 +30,10 @@ function ProfileScreen({ logout }) {
 
   return (
     <div className="flex min-h-[calc(100vh-120px)] relative  bg-gray-50">
-      <div className="flex flex-col w-[250px] fixed h-full  border-r-2 border-gray-100  py-8">
+      <ProfileSidebar />
+      <div className="sm:flex hidden flex-col w-[250px] fixed h-full  border-r-2 border-gray-100  py-8">
         <h3 className="text-xl font-semibold my-4 text-center">User Profile</h3>
+
         <NavLink
           style={({ isActive }) =>
             isActive
@@ -61,7 +65,7 @@ function ProfileScreen({ logout }) {
               : undefined
           }
           className="text-gray-400 text-medium my-3 flex items-center space-x-3 px-8"
-          to="reviews"
+          to={`reviews?user=${user._id}`}
         >
           <IoChatboxOutline size={18} />
           <p>My reviews</p>
@@ -87,12 +91,13 @@ function ProfileScreen({ logout }) {
           <p>Logout</p>
         </div>
       </div>
-      <div className="flex-1 ml-[250px]">
+      <div className="flex-1 ml-[54px] sm:ml-[250px]">
         <Routes>
           <Route path="userInfo" element={<UserInfoScreen />} />
           <Route path="reviews" element={<UserReviewsScreen />} />
           <Route path="orders" element={<UserOrdersScreen />} />
           <Route path="setting" element={<Settings />} />
+          <Route path="*" element={<Navigate to="userInfo" replace />} />
         </Routes>
       </div>
     </div>
@@ -101,7 +106,7 @@ function ProfileScreen({ logout }) {
 
 const mapStateToProps = state => {
   return {
-    state: state,
+    user: state.user.user,
   };
 };
 

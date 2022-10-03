@@ -4,19 +4,21 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     password: {
       type: String,
-      require,
+      required: true,
     },
     profileImage: {
       type: String,
+      default:
+        "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg",
     },
     phoneNumber: {
       type: Number,

@@ -12,21 +12,21 @@ const adminSchema = new mongoose.Schema(
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          require: true,
+          required: true,
           unique: true,
           ref: "user",
         },
         description: {
           type: String,
-          require: true,
+          required: true,
         },
         price: {
           type: Number,
-          require: true,
+          required: true,
         },
         categories: {
           type: [String],
-          require: true,
+          required: true,
         },
         images: [String],
       },
@@ -35,17 +35,17 @@ const adminSchema = new mongoose.Schema(
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          require: true,
+          required: true,
           unique: true,
           ref: "user",
         },
         description: {
           type: String,
-          require: true,
+          required: true,
         },
         categories: {
           type: [String],
-          require: true,
+          required: true,
         },
       },
     ],

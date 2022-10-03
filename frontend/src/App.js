@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import HomeScreen from "./Screens/HomeScreen";
@@ -16,16 +17,30 @@ import PaymentMethodScreen from "./Screens/PaymentMethodScreen";
 import OrderDetails from "./Screens/OrderDetails";
 import { connect } from "react-redux";
 import AdminDashboard from "./Screens/AdminDashboard";
+import SellerDashboard from "./Screens/SellerDashboard";
+import EditStore from "./Screens/EditStore";
+import WorkerDashboard from "./Screens/WorkerDashboard";
+import EditProduct from "./Screens/EditProduct";
+import ProtectRoute from "./Components/ProtectRoute";
+import BlockchainPaymentScreen from "./Components/BlockchainPaymentScreen";
+import ViewOrderScreen from "./Screens/ViewOrderScreen";
+import ImageSearch from "./Screens/ImageSearch";
+import Sidebar from "./Components/Sidebar";
+import ShippingAddressFormScreen from "./Screens/ShippingAddressFormScreen";
 
-function App({ model }) {
-  console.log("Model******", model);
+function App() {
+  const [show, setShow] = useState(false);
   return (
-    <div className={`relative min-h-[100vh] py-16`}>
+    <div className={`relative min-h-[100vh] py-12`}>
       <BrowserRouter>
-        <Header />
+        {show && <Sidebar show={show} setShow={setShow} />}
+        <Header show={show} setShow={setShow} />
+
         <Routes>
           <Route path="/" element={<HomeScreen />} />
+          <Route path="/imageSearch" element={<ImageSearch />} />
           <Route path="products/:productId" element={<ProductDetails />} />
+          <Route path="editProduct/:productId" element={<EditProduct />} />
           <Route path="login" element={<Login />} />
           <Route path="registeration" element={<Registeration />} />
           <Route path="cart" element={<CartScreen />} />
@@ -36,8 +51,51 @@ function App({ model }) {
           <Route path="shipping" element={<Shipping />} />
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
-          <Route path="profile/:userId/*" element={<ProfileScreen />} />
-          <Route path="AdminDashboard/*" element={<AdminDashboard />} />
+          <Route path="ViewOrder/:orderId" element={<ViewOrderScreen />} />
+          <Route
+            path="blockchainPayment"
+            element={<BlockchainPaymentScreen />}
+          />
+
+          <Route
+            path="profile/:userId/*"
+            element={
+              <ProtectRoute>
+                <ProfileScreen />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="adminDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isAdmin"}>
+                <AdminDashboard />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="shippingAddressFormScreen"
+            element={<ShippingAddressFormScreen />}
+          />
+          <Route
+            path="workerDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isWorker"}>
+                <WorkerDashboard />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="sellerDashboard/*"
+            element={
+              <ProtectRoute role={true} actor={"isSeller"}>
+                <SellerDashboard />
+              </ProtectRoute>
+            }
+          />
+          {/* <Route path="adminDashboard/*" element={<AdminDashboard />} /> */}
+          {/* <Route path="workerDashboard/*" element={<WorkerDashboard />} />
+          <Route path="sellerDashboard/*" element={<SellerDashboard />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

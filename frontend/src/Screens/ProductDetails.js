@@ -9,6 +9,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import Slider from "../Components/Slider";
 import { connect } from "react-redux";
 import { ADD_TO_CART, ADD_TO_CART_LOCAL } from "../Redux/Constants";
+import ReviewBox from "../Components/ReviewBox";
 
 function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
   const [productData, setProductData] = useState({});
@@ -76,65 +77,90 @@ function ProductDetails({ addToCartAction, user, cart, addToCartLocal }) {
     }
   };
 
+  console.log("Product Data---------", productData);
+
   return loading ? (
     <Loading />
   ) : error ? (
     <ErrorBox variant="fail" message={error} />
   ) : (
-    <div className="flex flex-col flex-1 space-x-0 md:space-x-8 space-y-8 md:flex-row md:items-center py-4 px-6 box-border sm:flex-col sm:px-10">
-      <div className="flex-1 sm:px-10">
-        <Slider />
-      </div>
-      <div className="flex-1">
-        <p className="text-4xl font-light">{productData.name}</p>
-        <p className="w-16 border-b-[2px] my-2 border-black"></p>
-        <p className="font-semibold text-md my-4">{`Rs. ${productData.price}`}</p>
-        <div className="flex flex-row items-center">
-          <RatingStars rating={productData.rating} />
-          <p className="ml-2 text-gray-600">({productData.numRating})</p>
+    <div>
+      <div className="flex flex-col flex-1 space-x-0 md:space-x-8 space-y-8 md:flex-row md:items-center py-4 px-6 box-border sm:flex-col sm:px-10">
+        <div className="flex-1 sm:px-10">
+          <Slider images={productData.images} />
         </div>
-        <div className="flex my-4 items-center">
-          <img
-            className="h-10 w-10 rounded-full border border-gray-300 p-1 mr-2"
-            src={productData.images[0]}
-          />
-          <p className="text-medium font-semibold">The sanitary store</p>
-        </div>
-        <p className="text-sm font-normal italic">{productData.description}</p>
-        <p className="text-sm text-gray-600 mb-2 mt-4">QTY</p>
-        <div className="flex items-center">
-          <p
-            className="bg-gray-50 py-3 p-4 border border-gray-200"
-            onClick={() => qtyHandler(-1)}
-          >
-            <AiOutlineMinus className="text-lg font-thin" />
+        <div className="flex-1">
+          <p className="text-4xl font-light">{productData.name}</p>
+          <p className="w-16 border-b-[2px] my-2 border-black"></p>
+          <p className="font-semibold text-md my-4">{`Rs. ${productData.price}`}</p>
+          <div className="flex flex-row items-center">
+            <RatingStars rating={productData.rating} />
+            <p className="ml-2 text-gray-600">({productData.ratings.length})</p>
+          </div>
+          <div className="flex my-4 items-center">
+            <img
+              className="h-10 w-10 rounded-full border border-gray-300 p-1 mr-2"
+              src={productData?.store.image}
+            />
+            <p className="text-medium font-semibold">
+              {productData?.store?.name}
+            </p>
+          </div>
+          <p className="text-sm font-normal italic">
+            {productData.description}
           </p>
-          <input
-            placeholder="1"
-            type="number"
-            value={qty}
-            className="w-24 py-[9px]  text-center outline-0  border-t border-b border-gray-200"
-            onChange={e => inputHandler(e.target.value)}
-            min={1}
-          />
+          <p className="text-sm text-gray-600 mb-2 mt-4">QTY</p>
+          <div className="flex items-center">
+            <p
+              className="bg-gray-50 py-3 p-4 border border-gray-200"
+              onClick={() => qtyHandler(-1)}
+            >
+              <AiOutlineMinus className="text-lg font-thin" />
+            </p>
+            <input
+              placeholder="1"
+              type="number"
+              value={qty}
+              className="w-24 py-[9px]  text-center outline-0  border-t border-b border-gray-200"
+              onChange={e => inputHandler(e.target.value)}
+              min={1}
+            />
 
-          <p
-            className="bg-gray-50 py-3 p-4 border border-gray-200"
-            onClick={() => qtyHandler(1)}
+            <p
+              className="bg-gray-50 py-3 p-4 border border-gray-200"
+              onClick={() => qtyHandler(1)}
+            >
+              <IoAddOutline className="text-lg font-thin" />
+            </p>
+          </div>
+          <button
+            onClick={addToCart}
+            disabled={outOfStock}
+            className={`${
+              outOfStock ? "bg-violet-100" : "bg-violet-500 "
+            }  text-white p-2 px-4 my-6 rounded`}
           >
-            <IoAddOutline className="text-lg font-thin" />
-          </p>
+            ADD TO CART
+          </button>
+          {outOfStock ? (
+            <ErrorBox variant="fail" message="Out of Stock" />
+          ) : null}
         </div>
-        <button
-          onClick={addToCart}
-          disabled={outOfStock}
-          className={`${
-            outOfStock ? "bg-violet-100" : "bg-violet-500 "
-          }  text-white p-2 px-4 my-6 rounded`}
-        >
-          ADD TO CART
-        </button>
-        {outOfStock ? <ErrorBox variant="fail" message="Out of Stock" /> : null}
+      </div>
+      <div>
+        <p className="text-lg text-center underline underline-offset-4 my-4">
+          Ratings and Reviews
+        </p>
+
+        {productData?.reviews?.map(review => (
+          <ReviewBox
+            review={{
+              ...review,
+              customerId: review.user,
+              review: review.message,
+            }}
+          />
+        ))}
       </div>
     </div>
   );

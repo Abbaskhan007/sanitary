@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import {
   ADD_TO_CART,
   EMPTY_CART,
+  FETCH_SELLER_DATA,
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
@@ -84,7 +85,7 @@ const mapStateToProps = state => {
   console.log("State", state);
   return {
     user: state.user,
-    cart: state.cart.cart
+    cart: state.cart.cart,
   };
 };
 
@@ -108,14 +109,24 @@ const mapDispatchToProps = dispatch => {
             type: LOGIN_REQUEST_SUCCESS,
             payload: data.user,
           });
+          if (data.user.isSeller) {
+            try {
+              const response = await Axios.get(
+                `/api/seller/getSeller/${data.user._id}`
+              );
+              console.log("Response", response);
+              dispatch({ type: FETCH_SELLER_DATA, payload: response.data });
+              localStorage.setItem("seller", JSON.stringify(response.data));
+            } catch (err) {
+              alert(err.message);
+            }
+          }
           localStorage.setItem("user", JSON.stringify(data.user));
-
 
           localStorage.removeItem("cart");
           dispatch({ type: EMPTY_CART });
 
-    
-          await cart.forEach(async (item) => {
+          await cart.forEach(async item => {
             console.log("Item", item);
             const cartData = await Axios.post("/api/cart/addToCart", {
               user: data.user._id,
@@ -127,7 +138,6 @@ const mapDispatchToProps = dispatch => {
             console.log("Data", data);
             dispatch({ type: ADD_TO_CART, payload: cartData.data.products });
           });
-
         }
       } catch (err) {
         dispatch({

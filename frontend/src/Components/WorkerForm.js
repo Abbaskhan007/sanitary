@@ -6,20 +6,22 @@ import { IoCameraOutline, IoCloseOutline } from "react-icons/io5";
 import Axios from "axios";
 import Loading from "./Loading";
 
-function WorkerForm({ showModel, openModel, closeModel, user }) {
+function WorkerForm({
+  showModel,
+  openModel,
+  closeModel,
+  user,
+  workerCategories,
+}) {
   const imageRef = useRef(null);
   const [images, setImages] = useState([]);
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
+  const [city, setCity] = useState("");
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cloudinaryFormatImages, setCloudinaryFormatImages] = useState([]);
-  const data = [
-    { value: "Plumber", label: "Plumber" },
-    { value: "Electrician", label: "Electrician" },
-    { value: "Decorator", label: "Decorator" },
-    { value: "Doctor", label: "Doctor" },
-  ];
+
 
   const onImageChange = e => {
     console.log("()", e.target.files[0]);
@@ -52,6 +54,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
         const imageData = new FormData();
         imageData.append("file", image);
         imageData.append("upload_preset", "sanitary");
+        imageData.append("folder", "workers");
         const response = await Axios.post(
           "https://api.cloudinary.com/v1_1/dlxyvl6sb/image/upload",
           imageData
@@ -69,6 +72,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
       images: cloudinaryImages,
       user: user._id,
       categories: categoriesValue,
+      city,
     };
     console.log("Data", workerData);
     try {
@@ -91,7 +95,11 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
 
   return (
     <div>
-      <button onClick={openModel} className="bg-green-200 w-52 p-3 rounded-md ">
+      <button
+        disabled={user.isWorker}
+        onClick={openModel}
+        className="bg-green-200 w-52 p-3 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+      >
         Send Worker Request
       </button>
       {showModel ? (
@@ -117,7 +125,7 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
                     <Select
                       isMulti
                       name="categories"
-                      options={data}
+                      options={workerCategories}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       className="bg-red-200 mt-1"
@@ -140,6 +148,17 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
                       placeholder="Enter Price Per Hour"
                       value={price}
                       onChange={e => setPrice(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-lg font-medium ">City</label>
+                    <input
+                      type="text"
+                      className="outline-none border-2 border-gray-200 p-1 rounded-md w-full mt-1"
+                      placeholder="Enter City Name"
+                      name="city"
+                      value={city}
+                      onChange={e => setCity(e.target.value)}
                     />
                   </div>
                   <div>
@@ -207,9 +226,13 @@ function WorkerForm({ showModel, openModel, closeModel, user }) {
 }
 
 const mapStateToProps = state => {
+  const workerCategories = state.categories.workerCategories.map(ctg => {
+    return { label: ctg.label, value: ctg.name };
+  });
   return {
     showModel: state.model.modelOpen,
     user: state.user.user,
+    workerCategories,
   };
 };
 
