@@ -27,11 +27,12 @@ import ViewOrderScreen from "./Screens/ViewOrderScreen";
 import ImageSearch from "./Screens/ImageSearch";
 import Sidebar from "./Components/Sidebar";
 import ShippingAddressFormScreen from "./Screens/ShippingAddressFormScreen";
+import CategoryProducts from "./Screens/CategoryProducts";
 
 function App() {
   const [show, setShow] = useState(false);
   return (
-    <div className={`relative min-h-[100vh] py-12`}>
+    <div className={`relative min-h-[100vh] py-16 `}>
       <BrowserRouter>
         {show && <Sidebar show={show} setShow={setShow} />}
         <Header show={show} setShow={setShow} />
@@ -51,6 +52,10 @@ function App() {
           <Route path="shipping" element={<Shipping />} />
           <Route path="paymentMethod" element={<PaymentMethodScreen />} />
           <Route path="orderDetails" element={<OrderDetails />} />
+          <Route
+            path="categoryProduct/:category"
+            element={<CategoryProducts />}
+          />
           <Route path="ViewOrder/:orderId" element={<ViewOrderScreen />} />
           <Route
             path="blockchainPayment"

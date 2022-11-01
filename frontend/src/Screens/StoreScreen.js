@@ -61,7 +61,7 @@ function StoreScreen({ fetchStoreData, store, filterStore, categoryTypes }) {
           />
         </div>
         {store?.data?.length > 0 ? (
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2   gap-8">
+          <div className="grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2   gap-8">
             {store.data?.map(item => (
               <StoreCard store={item} />
             ))}

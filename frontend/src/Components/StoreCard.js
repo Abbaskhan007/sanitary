@@ -50,20 +50,21 @@ function StoreCard({ store, seller, fetchStoreData }) {
           </div>
         </div>
       )}
-      <img className="flex-1 object-cover max-h-[250px]" src={store.image} />
+      <img className="flex-1 object-cover max-h-[225px]" src={store.image} />
       <div className="p-2">
         <p className="text-lg font-medium mb-1">{store.name}</p>
-        <p className="text-sm font-medium">
-          Categories:{" "}
-          <span className="border border-gray-300 p-1 px-3 rounded-md font-medium text-gray-500 ml-2">
+        <div className="flex flex-row items-center flex-wrap">
+          <p className="text-sm font-medium">Categories: </p>
+          <span className="border border-gray-300 px-1 py-1 text-xs  rounded-md font-normal text-gray-500 ml-2">
             {store.category[0]}
           </span>{" "}
           {store.category.length > 1 && (
-            <span className="bg-gray-200 text-gray-500 py-2 px-3 rounded-md text-xs ml-2">
-              {store.category.length - 1} more
+            <span className="bg-gray-200 text-gray-500  p-2  rounded-full text-xs ml-3">
+              {store.category.length - 1} +
             </span>
           )}
-        </p>
+        </div>
+        
         <div className="flex space-x-2 py-2">
           <RatingStars rating={store.rating} />
           <p className="text-gray-400 text-sm">({store.ratings.length})</p>

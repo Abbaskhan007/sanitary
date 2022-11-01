@@ -260,7 +260,6 @@ function BlockchainPaymentScreen({
       {showModal && <Model />}
 
       <p className="text-xl font-semibold text-center">Sending Etherium</p>
-      
     </div>
   );
 }

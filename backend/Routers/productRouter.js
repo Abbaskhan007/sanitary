@@ -55,7 +55,9 @@ router.post("/addProduct", (req, res) => {
 router.get("/getProducts", (req, res) => {
   productModel
     .find({})
+    .sort({ rating: "-1" })
     .populate("store")
+
     .exec((err, data) => {
       if (err) throw err;
       else {
@@ -83,6 +85,16 @@ router.get("/getProduct/:id", async (req, res) => {
   const id = req.params.id;
   const productData = await productModel
     .findById(id)
+    .populate("store")
+    .populate("reviews.user");
+  console.log("Product Data", productData);
+  res.status(200).send(productData);
+});
+
+router.get("/getCategoryProducts/:category", async (req, res) => {
+  const category = req.params.category;
+  const productData = await productModel
+    .find({ category })
     .populate("store")
     .populate("reviews.user");
   console.log("Product Data", productData);

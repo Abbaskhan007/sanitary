@@ -34,7 +34,7 @@ function Sidebar({ setShow, user, logout }) {
           <div className="flex flex-col   ">
             <img
               className="w-32 h-32 mx-auto object-contain"
-              src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1664201584/sanitary-store/smart_sanitary-logos_transparent_qdal5i.png"
+              src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1665616632/sanitary-store/smart_sanitary-logos_transparent_elqtjb.png"
             />
           </div>
           <NavLink

@@ -84,13 +84,7 @@ function SellerRequests() {
               </div>
             </div>
             <p className={`${!show && "line-clamp-3"} my-2`}>
-              Hi, How are you buddy Hi, How are you buddy How are you buddy Hi,
-              How are you buddy How are you buddy Hi, How are you buddy How are
-              you buddy Hi, How are you buddy How are you buddy Hi, How are you
-              buddy How are you buddy Hi, How are you buddy How are you buddy
-              Hi, How are you buddy Hi, How are you buddy How are you buddy Hi,
-              How are you buddy How are you buddy Hi, How are you buddy How are
-              you buddy Hi, How are you buddy How are you buddy{" "}
+              {request.description}
             </p>
             {!show ? (
               <button

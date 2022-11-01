@@ -36,12 +36,12 @@ function Header({
 
   console.log("Cart", cart);
   return (
-    <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-2 px-6 z-30 ">
+    <div className="flex flex-row absolute top-0 w-full bg-violet-500 items-center justify-between p-3 px-6 z-30  ">
       <div>
         <img
           onClick={() => navigate("/")}
           className="h-10 w-10 cursor-pointer sm:inline-flex hidden"
-          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1664201584/sanitary-store/smart_sanitary-logos_transparent_qdal5i.png"
+          src="https://res.cloudinary.com/dlxyvl6sb/image/upload/v1665616632/sanitary-store/smart_sanitary-logos_transparent_elqtjb.png"
         />
         <div onClick={() => setShow(true)} className="cursor-pointer sm:hidden">
           <HiOutlineMenu color="#fff" size={26} />

@@ -13,7 +13,7 @@ const categoryRouter = require("./Routers/categoryRouter");
 const workerCategoriesRouter = require("./Routers/workerCategoriesRouter");
 const shippingRouter = require("./Routers/shippingAddressRouter");
 const orderRouter = require("./Routers/orderRouter");
-
+const bannerModel = require("./Models/bannerModel");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -40,6 +40,15 @@ app.get("/api/config", (req, res) => {
   res.send({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   });
+});
+
+app.get("/api/banners", async (req, res) => {
+  try {
+    const banners = await bannerModel.find();
+    res.status(200).json(banners);
+  } catch (err) {
+    res.status(401).send({ message: err.message });
+  }
 });
 
 app.post("/api/pay", async (req, res) => {
