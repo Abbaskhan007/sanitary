@@ -20,20 +20,14 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 console.log("PROCESS--", process.env.STRIPE_SECRET_KEY);
 
 mongoose
-  .connect("mongodb://localhost/sanitary", { useNewUrlParser: true })
+  .connect("mongodb+srv://Abbas:Abikhan123@cluster0.glggci4.mongodb.net/test", {
+    useNewUrlParser: true,
+  })
   .then(() => console.log("Connected to mongodb"));
 
 const app = express();
 
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  console.log("yes reciev");
-});
-
-app.get("/", (req, res) => {
-  res.send("Server running");
-});
 
 app.get("/api/config", (req, res) => {
   console.log("__________________________________");
@@ -84,4 +78,17 @@ app.use("/api/workerRequests", workerRequestRouter);
 app.use("/api/sellerRequests", sellerRequestRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/shippingAddress", shippingRouter);
-app.listen(5000, () => console.log("Server running at port 5000"));
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("frontend/build"));
+
+  const path = require("path");
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
+
+app.listen(process.env.PORT || 5000, () =>
+  console.log("Server running at port 5000")
+);

@@ -26,9 +26,20 @@ const orderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    paymentMethod: {
+      type: String,
+      required: true,
+    },
+    contractAddress: {
+      type: String,
+      default: null,
+    },
     deliveryType: {
       default: "custom",
       type: String,
+    },
+    paymentAddress: {
+      type: "String",
     },
 
     deliveredAt: {
