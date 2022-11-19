@@ -1,0 +1,176 @@
+Date : 2022-10-15 21:46:05
+Directory : /Users/apple/Desktop/Projects/sanitary-store
+Total : 132 files,  63752 codes, 158 comments, 873 blanks, all 64783 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          8 |     54,600 |          0 |          8 |     54,608 |
+| JavaScript |        119 |      9,039 |        134 |        813 |      9,986 |
+| Markdown   |          2 |         48 |          0 |         37 |         85 |
+| Solidity   |          1 |         23 |          1 |         11 |         35 |
+| CSS        |          1 |         22 |          0 |          3 |         25 |
+| HTML       |          1 |         20 |         23 |          1 |         44 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |        132 |     63,752 |        158 |        873 |     64,783 |
+| backend                                                                                             |         31 |      8,136 |         35 |        199 |      8,370 |
+| backend/Models                                                                                      |         13 |        537 |          0 |         54 |        591 |
+| backend/Routers                                                                                     |         13 |      1,064 |         35 |        124 |      1,223 |
+| frontend                                                                                            |         94 |     35,440 |        112 |        621 |     36,173 |
+| frontend/public                                                                                     |          2 |         45 |         23 |          2 |         70 |
+| frontend/src                                                                                        |         87 |      7,321 |         82 |        581 |      7,984 |
+| frontend/src/Components                                                                             |         33 |      2,723 |          6 |        203 |      2,932 |
+| frontend/src/Redux                                                                                  |         12 |        294 |          0 |         53 |        347 |
+| frontend/src/Redux/Reducer.js                                                                       |         10 |        231 |          0 |         38 |        269 |
+| frontend/src/Screens                                                                                |         36 |      4,057 |         29 |        310 |      4,396 |
+| frontend/src/utils                                                                                  |          2 |        143 |          0 |          3 |        146 |
+| smartContracts                                                                                      |          7 |     20,176 |         11 |         53 |     20,240 |
+| smartContracts/contracts                                                                            |          1 |         23 |          1 |         11 |         35 |
+| smartContracts/scripts                                                                              |          1 |         16 |          1 |          5 |         22 |
+| smartContracts/test                                                                                 |          1 |         92 |          8 |         27 |        127 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                            | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/adminModel.js                           | JavaScript |         63 |          0 |          4 |         67 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/cartModel.js                            | JavaScript |         26 |          0 |          4 |         30 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/categoryModel.js                        | JavaScript |         13 |          0 |          4 |         17 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/orderModel.js                           | JavaScript |         61 |          0 |          5 |         66 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/productModel.js                         | JavaScript |         74 |          0 |          5 |         79 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/sellerModel.js                          | JavaScript |         45 |          0 |          3 |         48 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/sellerRequests.js                       | JavaScript |         22 |          0 |          5 |         27 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/shippingAddressModel.js.js              | JavaScript |         48 |          0 |          4 |         52 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/storeModel.js                           | JavaScript |         45 |          0 |          4 |         49 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/userModels.js                           | JavaScript |         44 |          0 |          3 |         47 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/workerCategoriesModel.js                | JavaScript |         16 |          0 |          4 |         20 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/workerModel.js                          | JavaScript |         49 |          0 |          4 |         53 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Models/workerRequets.js                        | JavaScript |         31 |          0 |          5 |         36 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/adminRouter.js                         | JavaScript |         16 |          0 |          3 |         19 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/cartRouter.js                          | JavaScript |        157 |          2 |         18 |        177 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/categoryRouter.js                      | JavaScript |         13 |          0 |          3 |         16 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/orderRouter.js                         | JavaScript |        233 |          0 |         20 |        253 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/productRouter.js                       | JavaScript |        143 |         21 |         14 |        178 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/sellerRequestRouter.js                 | JavaScript |         51 |          0 |         10 |         61 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/sellerRouter.js                        | JavaScript |         27 |          0 |          5 |         32 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/shippingAddressRouter.js               | JavaScript |         67 |          0 |          7 |         74 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/storeRouter.js                         | JavaScript |         98 |         11 |         14 |        123 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/userRouter.js                          | JavaScript |        144 |          1 |         12 |        157 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/workerCategoriesRouter.js              | JavaScript |         13 |          0 |          3 |         16 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/workerRequestRouter.js                 | JavaScript |         52 |          0 |          9 |         61 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/Routers/workerRouter.js                        | JavaScript |         50 |          0 |          6 |         56 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/data.js                                        | JavaScript |         63 |          0 |          4 |         67 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/index.js                                       | JavaScript |         67 |          0 |         12 |         79 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/package-lock.json                              | JSON       |      6,367 |          0 |          1 |      6,368 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/package.json                                   | JSON       |         23 |          0 |          1 |         24 |
+| /Users/apple/Desktop/Projects/sanitary-store/backend/utils.js                                       | JavaScript |         15 |          0 |          3 |         18 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/README.md                                     | Markdown   |         38 |          0 |         33 |         71 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/package-lock.json                             | JSON       |     27,958 |          0 |          1 |     27,959 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/package.json                                  | JSON       |         65 |          0 |          1 |         66 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/postcss.config.js                             | JavaScript |          6 |          0 |          1 |          7 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/public/index.html                             | HTML       |         20 |         23 |          1 |         44 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/public/manifest.json                          | JSON       |         25 |          0 |          1 |         26 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/App.js                                    | JavaScript |         61 |         47 |          5 |        113 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/App.test.js                               | JavaScript |          7 |          0 |          2 |          9 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/AddressBox.js                  | JavaScript |         63 |          0 |          8 |         71 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/AdminSideBar.js                | JavaScript |        102 |          0 |          8 |        110 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/BlockchainPaymentScreen.js     | JavaScript |        262 |          2 |         34 |        298 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/CartItem.js                    | JavaScript |        143 |          1 |         15 |        159 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/CheckoutSteps.js               | JavaScript |         35 |          0 |          2 |         37 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ErrorBox.js                    | JavaScript |         14 |          0 |          2 |         16 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Filter.js                      | JavaScript |        154 |          0 |         12 |        166 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Footer.js                      | JavaScript |          8 |          0 |          2 |         10 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Header.js                      | JavaScript |        179 |          0 |          9 |        188 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Loading.js                     | JavaScript |         23 |          0 |          2 |         25 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Menu.js                        | JavaScript |         31 |          0 |          2 |         33 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Notification.js                | JavaScript |         25 |          0 |          2 |         27 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/OrderItem.js                   | JavaScript |         18 |          0 |          2 |         20 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/PriceSlider.js                 | JavaScript |         18 |          0 |          2 |         20 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ProductCard.js                 | JavaScript |         96 |          0 |          9 |        105 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ProfileSidebar.js              | JavaScript |        122 |          0 |          7 |        129 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ProtectRoute.js                | JavaScript |         18 |          0 |          4 |         22 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/RatingStars.js                 | JavaScript |        115 |          0 |          2 |        117 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ReviewBox.js                   | JavaScript |         40 |          0 |          2 |         42 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/SellerForm.js                  | JavaScript |        106 |          0 |          7 |        113 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/SellerSideBar.js               | JavaScript |         81 |          0 |          2 |         83 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/ShowMoreText.js                | JavaScript |         23 |          0 |          2 |         25 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Sidebar.js                     | JavaScript |        145 |          0 |          5 |        150 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/Slider.js                      | JavaScript |         56 |          0 |          2 |         58 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/StarBox.js                     | JavaScript |         60 |          0 |          2 |         62 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/StoreCard.js                   | JavaScript |         92 |          1 |         10 |        103 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/StripePayment.js               | JavaScript |        141 |          0 |          8 |        149 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/TrackOrder.js                  | JavaScript |         92 |          0 |          3 |         95 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/WorkerCard.js                  | JavaScript |         21 |          0 |          2 |         23 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/WorkerFilter.js                | JavaScript |        119 |          0 |         13 |        132 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/WorkerForm.js                  | JavaScript |        234 |          1 |         16 |        251 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/productSummary.js              | JavaScript |         78 |          1 |          3 |         82 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Components/workerDropDown.js              | JavaScript |          9 |          0 |          2 |         11 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Constants.js                        | JavaScript |         34 |          0 |         11 |         45 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/StoreReducer.js          | JavaScript |         18 |          0 |          3 |         21 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/blockchainReducer.js     | JavaScript |          8 |          0 |          3 |         11 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/cartReducer.js           | JavaScript |         66 |          0 |          9 |         75 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/categoryReducer.js       | JavaScript |         15 |          0 |          3 |         18 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/modalReducer.js          | JavaScript |         15 |          0 |          3 |         18 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/productReducer.js        | JavaScript |         21 |          0 |          3 |         24 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/sellerReducer.js         | JavaScript |         14 |          0 |          3 |         17 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/userReducer.js           | JavaScript |         46 |          0 |          4 |         50 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/workerCategoryReducer.js | JavaScript |         10 |          0 |          4 |         14 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/Reducer.js/workerReducer.js         | JavaScript |         18 |          0 |          3 |         21 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Redux/rootReducer.js                      | JavaScript |         29 |          0 |          4 |         33 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/AdminDashboard.js                 | JavaScript |         91 |          0 |          2 |         93 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/CartScreen.js                     | JavaScript |         51 |          1 |          6 |         58 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/CreateStore.js                    | JavaScript |        162 |          1 |         14 |        177 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/EditProduct.js                    | JavaScript |        275 |          0 |         16 |        291 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/EditStore.js                      | JavaScript |        176 |          0 |         12 |        188 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/HomeScreen.js                     | JavaScript |        154 |          2 |         10 |        166 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/ImageSearch.js                    | JavaScript |         59 |          1 |          8 |         68 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/Jkl.js                            | JavaScript |         23 |          0 |          2 |         25 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/Login.js                          | JavaScript |        142 |          0 |         11 |        153 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/OrderDetails.js                   | JavaScript |         64 |          0 |          8 |         72 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/PaymentMethodScreen.js            | JavaScript |         76 |          0 |          8 |         84 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/ProductDetails.js                 | JavaScript |        179 |          0 |         19 |        198 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/ProfileScreen.js                  | JavaScript |        116 |          0 |         11 |        127 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/Registeration.js                  | JavaScript |        165 |          1 |         16 |        182 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerDashboard.js                | JavaScript |         93 |         22 |          2 |        117 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerHome.js                     | JavaScript |         29 |          0 |          5 |         34 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerOrders.js                   | JavaScript |        211 |          0 |          7 |        218 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerProducts.js                 | JavaScript |         48 |          0 |          5 |         53 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerRequests.js                 | JavaScript |        120 |          0 |          9 |        129 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/SellerStores.js                   | JavaScript |         42 |          0 |          7 |         49 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/Settings.js                       | JavaScript |         45 |          0 |          5 |         50 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/Shipping.js                       | JavaScript |         90 |          0 |         12 |        102 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/ShippingAddressFormScreen.js      | JavaScript |        179 |          0 |         15 |        194 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/StoreDescriptionScreen.js         | JavaScript |         83 |          0 |          6 |         89 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/StoreDetail.js                    | JavaScript |         68 |          0 |          7 |         75 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/StoreProductsScreen.js            | JavaScript |         21 |          0 |          2 |         23 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/StoreScreen.js                    | JavaScript |        108 |          0 |         12 |        120 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/UploadProduct.js                  | JavaScript |        244 |          0 |         16 |        260 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/UserInfoScreen.js                 | JavaScript |        201 |          0 |         13 |        214 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/UserOrdersScreen.js               | JavaScript |        181 |          0 |          8 |        189 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/UserReviewsScreen.js              | JavaScript |         34 |          0 |          7 |         41 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/ViewOrderScreen.js                | JavaScript |        162 |          1 |          6 |        169 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/WorkerDashboard.js                | JavaScript |          4 |          0 |          2 |          6 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/WorkerDetails.js                  | JavaScript |         91 |          0 |          2 |         93 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/WorkerRequests.js                 | JavaScript |        139 |          0 |          8 |        147 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/Screens/WorkerScreen.js                   | JavaScript |        131 |          0 |         11 |        142 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/index.css                                 | CSS        |         22 |          0 |          3 |         25 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/index.js                                  | JavaScript |         14 |          0 |          2 |         16 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/utils/Transactions.json                   | JSON       |        140 |          0 |          1 |        141 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/src/utils/constants.js                        | JavaScript |          3 |          0 |          2 |          5 |
+| /Users/apple/Desktop/Projects/sanitary-store/frontend/tailwind.config.js                            | JavaScript |          7 |          7 |          2 |         16 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/README.md                               | Markdown   |         10 |          0 |          4 |         14 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/contracts/Transactions.sol              | Solidity   |         23 |          1 |         11 |         35 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/hardhat.config.js                       | JavaScript |         13 |          1 |          4 |         18 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/package-lock.json                       | JSON       |     20,002 |          0 |          1 |     20,003 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/package.json                            | JSON       |         20 |          0 |          1 |         21 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/scripts/deploy.js                       | JavaScript |         16 |          1 |          5 |         22 |
+| /Users/apple/Desktop/Projects/sanitary-store/smartContracts/test/Lock.js                            | JavaScript |         92 |          8 |         27 |        127 |
+| Total                                                                                               |            |     63,752 |        158 |        873 |     64,783 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
