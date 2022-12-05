@@ -121,18 +121,20 @@ function SellerHome({ user, fetchSellerData, seller }) {
       total += item.sales * etheriumValue;
     });
 
+    console.log("bank Orders", data.bankOrders);
+
     setTotalSales(total);
     data.bankOrders.map(item => {
       typeInside[item.paymentMethod] =
         typeInside[item.paymentMethod] + item.amount;
-      ctgInside[item.productId.category] =
-        ctgInside[item.productId.category] + item.amount;
+      ctgInside[item?.productId?.category] =
+        ctgInside[item?.productId?.category] + item.amount;
     });
     data.blockchainOrders.map(item => {
       typeInside[item.paymentMethod] =
         typeInside[item.paymentMethod] + item.amount * etheriumValue;
-      ctgInside[item.productId.category] =
-        ctgInside[item.productId.category] + item.amount * etheriumValue;
+      ctgInside[item?.productId?.category] =
+        ctgInside[item?.productId?.category] + item.amount * etheriumValue;
     });
 
     setSales(sales.slice(0, 12));
@@ -161,7 +163,7 @@ function SellerHome({ user, fetchSellerData, seller }) {
 
   useEffect(() => {
     if (showDate) {
-       onDateSearch();
+      onDateSearch();
     }
   }, [startDate, endDate, showDate]);
 
