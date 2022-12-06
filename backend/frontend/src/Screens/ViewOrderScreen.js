@@ -20,7 +20,7 @@ export default function ViewOrderScreen({
   const fetchOrder = async () => {
     setLoading(true);
     const { data } = await Axios.get(`${url}/orders/getOrder/${orderId}`);
-    console.log("Data", data);
+    console.log("Data", data, orderId);
     setorderData(data);
     setLoading(false);
   };
@@ -51,7 +51,7 @@ export default function ViewOrderScreen({
           size={24}
           className="absolute  cursor-pointer right-2 top-2 z-10 bg-black/30 font-bold text-white text-2xl rounded-full p-[3px]"
         />
-        {loading || !orderData._id ? (
+        {loading || !orderData?._id ? (
           <Loading />
         ) : (
           <div>
@@ -136,7 +136,9 @@ export default function ViewOrderScreen({
               </div>
             ) : sellerView ? (
               <div>
-                <p className="text-center text-lg font-semibold my-2">Note Rated till yet</p>
+                <p className="text-center text-lg font-semibold my-2">
+                  Note Rated till yet
+                </p>
               </div>
             ) : (
               <div>
